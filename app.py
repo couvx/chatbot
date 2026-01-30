@@ -31,20 +31,38 @@ def load_db():
         st.error(f"Gagal memuat database: {e}")
         return [], []
 
+def suggest_correction(query, db):
+    """Mencari saran kata kunci jika terjadi typo (Auto-Correction Logic)"""
+    words_pool = set()
+    for item in db:
+        # Ambil kata-kata dari klasifikasi dan keterangan untuk membangun kamus
+        content = f"{item.get('klasifikasi', '')} {item.get('keterangan', '')}".lower()
+        # Bersihkan simbol dan ambil kata unik
+        words_pool.update("".join([c for c in content if c.isalnum() or c.isspace()]).split())
+    
+    best_match = None
+    highest_ratio = 0
+    
+    for word in words_pool:
+        if len(word) < 4: continue # Abaikan kata yang terlalu pendek
+        ratio = fuzz.ratio(query.lower(), word)
+        if ratio > highest_ratio:
+            highest_ratio = ratio
+            best_match = word
+            
+    # Kembalikan saran jika kemiripan antara 70% - 99% (bukan exact match)
+    if highest_ratio > 70 and highest_ratio < 100:
+        return best_match
+    return None
+
 def get_smart_intent(prompt):
-    """
-    Mendeteksi intent secara tegas. 
-    Mengembalikan: 'KODE', 'JENIS', atau 'GLOBAL'
-    """
+    """Mendeteksi intent: 'KODE', 'JENIS', atau 'GLOBAL'"""
     p = prompt.lower()
-    # Pembersihan teks untuk pencocokan kata kunci
     clean_words = set("".join([c for c in p if c.isalnum() or c.isspace()]).split())
     
-    # Kamus Spesifik
     keywords_kode = {"kode", "klasifikasi", "pp", "pl", "py", "nomor", "no"}
     keywords_jenis = {"jenis", "surat", "apa", "maksud", "arti", "pengertian", "definisi", "naskah"}
 
-    # Logika Prioritas
     if clean_words.intersection(keywords_kode):
         return "KODE"
     elif clean_words.intersection(keywords_jenis):
@@ -52,28 +70,39 @@ def get_smart_intent(prompt):
     return "GLOBAL"
 
 def smart_search(query, db, stemmer):
-    """Pencarian dengan Scoring & Ranking"""
+    """Pencarian dengan Skoring Multi-Layer"""
     if not db: return []
     
     query_clean = query.lower().strip()
     query_stemmed = stemmer.stem(query_clean)
+    query_words = set(query_clean.split())
     scored_results = []
     
     for item in db:
-        content = f"{item.get('klasifikasi', '')} {item.get('keterangan', '')}".lower()
+        klasifikasi = item.get('klasifikasi', '').lower()
+        keterangan = item.get('keterangan', '').lower()
         kode = item.get('kode', '').lower()
+        full_text = f"{klasifikasi} {keterangan}"
         
-        # Scoring
-        score = fuzz.token_set_ratio(query_clean, content)
-        if query_clean in kode: score += 40
-        if query_stemmed in content: score += 15
+        score = 0
+        if query_clean == kode:
+            score += 100 
+        elif query_clean in kode:
+            score += 60
+            
+        text_score = fuzz.token_set_ratio(query_clean, full_text)
+        
+        stem_bonus = 15 if query_stemmed in full_text else 0
+        keyword_bonus = 10 if any(word in klasifikasi for word in query_words) else 0
 
-        if score > 60:
+        final_score = score + text_score + stem_bonus + keyword_bonus
+        
+        if final_score > 65: # Threshold disesuaikan
             item_copy = item.copy()
-            item_copy['score'] = min(score, 100)
+            item_copy['score'] = min(final_score, 100)
             scored_results.append(item_copy)
             
-    return sorted(scored_results, key=lambda x: x.get('score', 0), reverse=True)
+    return sorted(scored_results, key=lambda x: (-x['score'], x.get('kode', '')))
 
 # --- 3. INITIALIZATION ---
 stemmer = init_nlp()
@@ -115,23 +144,21 @@ if prompt := st.chat_input("Ketik pertanyaan Anda..."):
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # 1. Deteksi Intent (Strict)
     intent = get_smart_intent(prompt)
     
-    # 2. Filter Database berdasarkan Intent
+    # Filter Database
     if intent == "KODE":
-        results = smart_search(prompt, db_kode, stemmer)
+        current_db = db_kode
         context_msg = "Mencari di Database Kode Klasifikasi..."
     elif intent == "JENIS":
-        results = smart_search(prompt, db_jenis, stemmer)
+        current_db = db_jenis
         context_msg = "Mencari di Database Jenis Naskah/Surat..."
     else:
-        # Jika tidak terdeteksi, cari di keduanya
-        results = smart_search(prompt, db_kode, stemmer) + smart_search(prompt, db_jenis, stemmer)
-        results = sorted(results, key=lambda x: x.get('score', 0), reverse=True)
+        current_db = db_kode + db_jenis
         context_msg = "Mencari informasi relevan..."
 
-    # 3. Jawaban Assistant
+    results = smart_search(prompt, current_db, stemmer)
+
     with st.chat_message("assistant"):
         if results:
             top_results = results[:5]
@@ -146,14 +173,16 @@ if prompt := st.chat_input("Ketik pertanyaan Anda..."):
                     st.write(f"**Sifat:** {r.get('sifat', '-')}")
                     st.info(f"**Keterangan:** {r.get('keterangan', '-')}")
             
-            st.session_state.messages.append({
-                "role": "assistant", 
-                "content": response_text, 
-                "results": top_results
-            })
+            st.session_state.messages.append({"role": "assistant", "content": response_text, "results": top_results})
         else:
-            error_msg = f"Maaf, saya tidak menemukan data di kategori **{intent}**. Coba gunakan kata kunci yang lebih spesifik."
+            # JIKA TIDAK ADA HASIL, CARI SARAN KOREKSI
+            suggestion = suggest_correction(prompt, current_db)
+            error_msg = f"Maaf, saya tidak menemukan data untuk kata kunci **'{prompt}'**."
             st.error(error_msg)
+            
+            if suggestion:
+                st.info(f"💡 Mungkin maksud Anda: **{suggestion}**?")
+            
             st.session_state.messages.append({"role": "assistant", "content": error_msg})
 
     st.rerun()
