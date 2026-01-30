@@ -71,23 +71,22 @@ st.markdown("""
         line-height: 1.6;
     }
             
-    /* --- STYLE BUBBLE USER (KANAN) --- */
+    /* --- BUBBLE USER (KANAN) --- */
+    /* Mengatur kontainer agar pesan merapat ke kanan */
     [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
         flex-direction: row-reverse;
-        text-align: right;
         background-color: transparent !important;
+        transition: all 0.3s;
     }
 
-    [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) .st-emotion-cache-10t9u47, 
+    /* Mengatur bubble agar lebarnya menyesuaikan teks (fit-content) */
     [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] {
-        background-color: #e11d48 !important; /* Merah */
-        color: #ffeb3b !important; /* Kuning sesuai gambar */
+        background-color: #e11d48 !important; /* Warna Merah */
+        color: white !important; /* Warna Kuning */
         border-radius: 20px 5px 20px 20px !important;
-        padding: 12px 18px !important;
-    }
-
-    [data-testid="stChatMessageAvatarUser"] {
-        background-color: #e11d48 !important;
+        padding: 10px 16px !important;
+        width: fit-content !important; /* Kunci agar bubble menyesuaikan teks */
+        margin-left: auto; /* Memaksa bubble ke kanan */
     }
 
     /* --- STYLE BUBBLE ASSISTANT (KIRI) --- */
