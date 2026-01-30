@@ -156,27 +156,26 @@ def load_db():
     return kode_data, jenis_data
 
 
-def suggest_correction(query, db):
-    """Memberi saran koreksi kata"""
+def suggest_correction(query, db, threshold=70, limit=7):
     words_pool = set()
 
     for item in db:
         content = f"{item.get('klasifikasi', '')} {item.get('keterangan', '')}".lower()
-        clean_text = "".join(c for c in content if c.isalnum() or c.isspace())
-        words_pool.update(clean_text.split())
+        clean = "".join(c for c in content if c.isalnum() or c.isspace())
+        words_pool.update(clean.split())
 
-    best_match, best_score = None, 0
-
+    suggestions = []
     for word in words_pool:
         if len(word) < 4:
             continue
+        ratio = fuzz.ratio(query.lower(), word)
+        if threshold <= ratio < 100:
+            suggestions.append((word, ratio))
 
-        score = fuzz.ratio(query.lower(), word)
-        if score > best_score:
-            best_score = score
-            best_match = word
+    # Urutkan dari paling mirip
+    suggestions = sorted(suggestions, key=lambda x: x[1], reverse=True)
 
-    return best_match if 75 < best_score < 100 else None
+    return suggestions[:limit]
 
 
 def smart_search(query, db, stemmer):
@@ -239,7 +238,7 @@ def render_results(results, title):
 
     st.subheader(title)
 
-    for item in results[:3]:
+    for r in results[:3]:
         score = item.get("score", 0)
         color = "green" if score > 85 else "orange"
 
@@ -326,14 +325,15 @@ if prompt := st.chat_input("Ketik kata kunci (misal: Kepegawaian)..."):
             error_msg = f"Maaf, tidak ditemukan data untuk **'{prompt}'**."
             st.error(error_msg)
 
-            suggestion = suggest_correction(prompt, db_kode + db_jenis)
-            if suggestion:
-                st.markdown("💡 Mungkin maksud Anda:")
-                if st.button(f"🔍 Cari: {suggestion}"):
-                    st.session_state.messages.append(
-                        {"role": "user", "content": suggestion}
-                    )
-                    st.rerun()
+            suggestions = suggest_correction(prompt, db_kode + db_jenis)
+            if suggestions:
+                st.markdown("💡 Mungkin maksud Anda adalah:")
+                for word, score in suggestions:
+                    if st.button(f"🔍 {word} ({score}%)", key=f"suggest_{word}"):
+                        st.session_state.messages.append(
+                            {"role": "user", "content": word}
+                        )
+                        st.rerun()
 
             st.session_state.messages.append(
                 {"role": "assistant", "content": error_msg}
