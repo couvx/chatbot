@@ -5,155 +5,117 @@ import datetime
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from thefuzz import fuzz
 
-# --- 1. KONFIGURASI HALAMAN ---
+# --- 1. KONFIGURASI ---
 st.set_page_config(page_title="DinasChat Pro", page_icon="🤖", layout="centered")
-
-# --- 2. CORE FUNCTIONS (NLP & DATABASE) ---
 
 @st.cache_resource
 def init_nlp():
-    """Inisialisasi Stemmer Bahasa Indonesia"""
     return StemmerFactory().create_stemmer()
 
 @st.cache_data
 def load_db():
-    """Memuat database JSON secara terpisah"""
-    kode_data, jenis_data = [], []
     try:
-        if os.path.exists('db_kode.json'):
-            with open('db_kode.json', 'r', encoding='utf-8') as f:
-                kode_data = json.load(f)
-        if os.path.exists('db_jenis.json'):
-            with open('db_jenis.json', 'r', encoding='utf-8') as f:
-                jenis_data = json.load(f)
-        return kode_data, jenis_data
-    except Exception as e:
-        st.error(f"Gagal memuat database: {e}")
+        with open('db_kode.json', 'r', encoding='utf-8') as f:
+            kode_db = json.load(f)
+        with open('db_jenis.json', 'r', encoding='utf-8') as f:
+            jenis_db = json.load(f)
+        return kode_db, jenis_db
+    except:
         return [], []
 
-def get_smart_intent(prompt):
-    """
-    Mendeteksi intent secara tegas. 
-    Mengembalikan: 'KODE', 'JENIS', atau 'GLOBAL'
-    """
-    p = prompt.lower()
-    # Pembersihan teks untuk pencocokan kata kunci
-    clean_words = set("".join([c for c in p if c.isalnum() or c.isspace()]).split())
-    
-    # Kamus Spesifik
-    keywords_kode = {"kode", "klasifikasi", "pp", "pl", "py", "nomor", "no"}
-    keywords_jenis = {"jenis", "surat", "apa", "maksud", "arti", "pengertian", "definisi", "naskah"}
-
-    # Logika Prioritas
-    if clean_words.intersection(keywords_kode):
-        return "KODE"
-    elif clean_words.intersection(keywords_jenis):
-        return "JENIS"
-    return "GLOBAL"
+# --- 2. LOGIKA PENCARIAN CERDAS ---
 
 def smart_search(query, db, stemmer):
-    """Pencarian dengan Scoring & Ranking"""
     if not db: return []
     
     query_clean = query.lower().strip()
-    query_stemmed = stemmer.stem(query_clean)
-    scored_results = []
+    results = []
     
     for item in db:
-        content = f"{item.get('klasifikasi', '')} {item.get('keterangan', '')}".lower()
         kode = item.get('kode', '').lower()
+        klasifikasi = item.get('klasifikasi', '').lower()
         
-        # Scoring
-        score = fuzz.token_set_ratio(query_clean, content)
-        if query_clean in kode: score += 40
-        if query_stemmed in content: score += 15
+        score = 0
+        # A. Prioritas 1: Kecocokan Kode Persis
+        if query_clean == kode:
+            score = 100
+        # B. Prioritas 2: Kode dimulai dengan input (Misal input 'PP' cocok dengan 'PP.01')
+        elif kode.startswith(query_clean):
+            score = 90
+        # C. Prioritas 3: Input ada di dalam kode (Misal '01' cocok dengan 'PP.01')
+        elif query_clean in kode:
+            score = 80
+        # D. Prioritas 4: Fuzzy matching pada teks klasifikasi
+        else:
+            score = fuzz.token_set_ratio(query_clean, klasifikasi)
 
-        if score > 60:
+        if score > 50:  # Threshold saran
             item_copy = item.copy()
-            item_copy['score'] = min(score, 100)
-            scored_results.append(item_copy)
+            item_copy['score'] = score
+            results.append(item_copy)
             
-    return sorted(scored_results, key=lambda x: x.get('score', 0), reverse=True)
+    return sorted(results, key=lambda x: x.get('score', 0), reverse=True)
 
 # --- 3. INITIALIZATION ---
 stemmer = init_nlp()
 db_kode, db_jenis = load_db()
 
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": "Halo! Saya asisten khusus naskah dinas. Silakan tanya tentang **Kode Klasifikasi** atau **Jenis Surat**."}]
+    st.session_state.messages = [{"role": "assistant", "content": "Halo! Ketik kode (contoh: 'PP') atau jenis surat untuk mencari."}]
 
-# --- 4. SIDEBAR ---
+# --- 4. UI SIDEBAR ---
 with st.sidebar:
-    st.title("⚙️ Panel Kontrol")
-    if st.button("🗑️ Hapus Riwayat Chat", use_container_width=True):
-        st.session_state.messages = [{"role": "assistant", "content": "Riwayat dihapus. Ada yang bisa saya bantu?"}]
+    st.title("⚙️ Opsi")
+    if st.button("🗑️ Hapus Chat", use_container_width=True):
+        st.session_state.messages = [{"role": "assistant", "content": "Riwayat dihapus."}]
         st.rerun()
-    st.divider()
-    st.caption("Database Terdeteksi:")
-    st.write(f"- DB Kode: {len(db_kode)} data")
-    st.write(f"- DB Jenis: {len(db_jenis)} data")
 
 # --- 5. INTERFACE CHAT ---
 st.title("🤖 DinasChat Pro")
 
-# Render Riwayat Chat
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
-        if "results" in msg and msg["results"]:
+        if "results" in msg:
             for r in msg["results"]:
-                s = r.get('score', 0)
-                clr = "green" if s > 85 else "orange"
-                with st.expander(f"📍 {r.get('kode', 'N/A')} - {r.get('klasifikasi', 'Detail')}"):
-                    st.markdown(f":{clr}[**Relevansi: {s}%**]")
-                    st.write(f"**Sifat:** {r.get('sifat', '-')}")
-                    st.info(f"**Keterangan:** {r.get('keterangan', '-')}")
+                with st.expander(f"📍 {r.get('kode')} - {r.get('klasifikasi')}"):
+                    st.write(f"**Keterangan:** {r.get('keterangan')}")
 
-# Input User
-if prompt := st.chat_input("Ketik pertanyaan Anda..."):
+if prompt := st.chat_input("Masukkan kode atau kata kunci..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # 1. Deteksi Intent (Strict)
-    intent = get_smart_intent(prompt)
+    # Logika Penentuan Database (Intent)
+    p = prompt.lower()
+    # Jika input pendek atau mengandung angka, asumsikan mencari KODE
+    is_short_code = len(p) <= 5 or any(char.isdigit() for char in p)
     
-    # 2. Filter Database berdasarkan Intent
-    if intent == "KODE":
-        results = smart_search(prompt, db_kode, stemmer)
-        context_msg = "Mencari di Database Kode Klasifikasi..."
-    elif intent == "JENIS":
-        results = smart_search(prompt, db_jenis, stemmer)
-        context_msg = "Mencari di Database Jenis Naskah/Surat..."
+    if is_short_code or any(x in p for x in ["pp", "pl", "py", "kode"]):
+        db_to_search = db_kode
+        target_name = "Kode Klasifikasi"
     else:
-        # Jika tidak terdeteksi, cari di keduanya
-        results = smart_search(prompt, db_kode, stemmer) + smart_search(prompt, db_jenis, stemmer)
-        results = sorted(results, key=lambda x: x.get('score', 0), reverse=True)
-        context_msg = "Mencari informasi relevan..."
+        db_to_search = db_jenis
+        target_name = "Jenis Naskah"
 
-    # 3. Jawaban Assistant
+    results = smart_search(prompt, db_to_search, stemmer)
+
     with st.chat_message("assistant"):
         if results:
-            top_results = results[:5]
-            response_text = f"**{context_msg}**\nDitemukan {len(results)} hasil yang cocok:"
-            st.markdown(response_text)
+            # Jika skor tertinggi tidak 100%, katakan "Mungkin maksud Anda..."
+            header = "Ditemukan hasil berikut:" if results[0]['score'] == 100 else "Saya menemukan beberapa saran yang mirip:"
+            st.markdown(f"**{header}**")
             
+            top_results = results[:5]
             for r in top_results:
-                s = r.get('score', 0)
-                clr = "green" if s > 85 else "orange"
-                with st.expander(f"📍 {r.get('kode', 'N/A')} - {r.get('klasifikasi', 'Detail')}"):
-                    st.markdown(f":{clr}[**Relevansi: {s}%**]")
+                with st.expander(f"📍 {r.get('kode')} - {r.get('klasifikasi')}"):
                     st.write(f"**Sifat:** {r.get('sifat', '-')}")
                     st.info(f"**Keterangan:** {r.get('keterangan', '-')}")
             
-            st.session_state.messages.append({
-                "role": "assistant", 
-                "content": response_text, 
-                "results": top_results
-            })
+            st.session_state.messages.append({"role": "assistant", "content": header, "results": top_results})
         else:
-            error_msg = f"Maaf, saya tidak menemukan data di kategori **{intent}**. Coba gunakan kata kunci yang lebih spesifik."
-            st.error(error_msg)
-            st.session_state.messages.append({"role": "assistant", "content": error_msg})
+            msg_fail = "Tidak ditemukan hasil yang mirip. Coba masukkan kode lain."
+            st.error(msg_fail)
+            st.session_state.messages.append({"role": "assistant", "content": msg_fail})
 
     st.rerun()
