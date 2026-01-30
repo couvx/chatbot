@@ -227,7 +227,7 @@ with st.sidebar:
         st.rerun()
 
 # --- 5. INTERFACE CHAT ---
-# st.title("🤖 DinasChat Pro")
+# st.title("Chatbot")
 
 # Header Atas (Logo dan Judul Kecil)
 st.markdown(f"""
@@ -235,6 +235,7 @@ st.markdown(f"""
         <div class="header-logo">📄</div>
         <div class="header-text">
             <h1>Klasifikasi Surat KPU Basis Data PKPU 1257</h1>
+            <p>Created by Nindya Rahma Wiranda</P>
         </div>
     </div>
 """, unsafe_allow_html=True)
