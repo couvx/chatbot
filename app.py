@@ -1,66 +1,14 @@
 import streamlit as st
 import json
 import os
-import pandas as pd
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from thefuzz import fuzz
-from datetime import datetime
 
 # --- 1. KONFIGURASI HALAMAN ---
-st.set_page_config(page_title="Klasifikasi Surat KPU", page_icon="📄", layout="wide")
-
-# Custom CSS untuk UI sesuai gambar
-st.markdown("""
-    <style>
-    /* Background Utama */
-    .stApp { background-color: #f0f2f5; }
-    
-    /* Sidebar Styling */
-    [data-testid="stSidebar"] { background-color: white; border-right: 1px solid #e0e0e0; }
-    
-    /* Chat Bubble User (Merah) */
-    .user-bubble {
-        background-color: #d32f2f;
-        color: white;
-        padding: 12px 18px;
-        border-radius: 20px 20px 0px 20px;
-        display: inline-block;
-        max-width: 80%;
-        float: right;
-        margin: 5px 0;
-    }
-    
-    /* Chat Bubble Assistant (Putih/Abu sangat muda) */
-    .assistant-bubble {
-        background-color: white;
-        color: #333;
-        padding: 15px 20px;
-        border-radius: 0px 20px 20px 20px;
-        display: inline-block;
-        max-width: 90%;
-        border: 1px solid #e0e0e0;
-        margin: 5px 0;
-        line-height: 1.6;
-    }
-
-    /* Avatar Container */
-    .chat-row { display: flex; margin-bottom: 20px; width: 100%; }
-    .row-reverse { flex-direction: row-reverse; }
-    .avatar { width: 35px; height: 35px; border-radius: 50%; margin: 0 10px; }
-    
-    /* Welcome Screen */
-    .welcome-container {
-        display: flex; flex-direction: column; align-items: center;
-        justify-content: center; text-align: center; padding: 60px 20px;
-    }
-    .welcome-icon { 
-        background-color: #fff1f1; padding: 20px; border-radius: 20px;
-        font-size: 40px; color: #d32f2f; margin-bottom: 20px; 
-    }
-    </style>
-    """, unsafe_allow_html=True)
+st.set_page_config(page_title="DinasChat Pro", page_icon="🤖", layout="centered")
 
 # --- 2. CORE FUNCTIONS ---
+
 @st.cache_resource
 def init_nlp():
     return StemmerFactory().create_stemmer()
@@ -76,8 +24,24 @@ def load_db():
             with open('db_jenis.json', 'r', encoding='utf-8') as f:
                 jenis_data = json.load(f)
         return kode_data, jenis_data
-    except Exception:
+    except Exception as e:
+        st.error(f"Gagal memuat database: {e}")
         return [], []
+
+def suggest_correction(query, db):
+    words_pool = set()
+    for item in db:
+        content = f"{item.get('klasifikasi', '')} {item.get('keterangan', '')}".lower()
+        words_pool.update("".join([c for c in content if c.isalnum() or c.isspace()]).split())
+    
+    best_match, highest_ratio = None, 0
+    for word in words_pool:
+        if len(word) < 4: continue
+        ratio = fuzz.ratio(query.lower(), word)
+        if ratio > highest_ratio:
+            highest_ratio, best_match = ratio, word
+            
+    return best_match if 75 < highest_ratio < 100 else None
 
 def smart_search(query, db, stemmer):
     if not db: return []
@@ -86,111 +50,88 @@ def smart_search(query, db, stemmer):
     scored_results = []
     
     for item in db:
-        content = f"{item.get('klasifikasi', '')} {item.get('keterangan', '')}".lower()
+        klasifikasi = item.get('klasifikasi', '').lower()
+        keterangan = item.get('keterangan', '').lower()
         kode = item.get('kode', '').lower()
+        
         score = 0
         if query_clean == kode: score += 100
         elif query_clean in kode: score += 60
-        text_score = fuzz.token_set_ratio(query_clean, content)
-        stem_bonus = 15 if query_stemmed in content else 0
-        final_score = min(score + text_score + stem_bonus, 100)
         
-        if final_score >= 75: # Tetap pada filter 75-100%
+        text_score = fuzz.token_set_ratio(query_clean, f"{klasifikasi} {keterangan}")
+        stem_bonus = 15 if query_stemmed in (klasifikasi + keterangan) else 0
+        
+        final_score = min(score + text_score + stem_bonus, 100)
+        if final_score > 65:
             item_copy = item.copy()
             item_copy['score'] = final_score
             scored_results.append(item_copy)
+            
     return sorted(scored_results, key=lambda x: x['score'], reverse=True)
 
 # --- 3. INITIALIZATION ---
 stemmer = init_nlp()
 db_kode, db_jenis = load_db()
+
 if "messages" not in st.session_state:
-    st.session_state.messages = []
+    st.session_state.messages = [{"role": "assistant", "content": "Halo! Silakan tanya tentang **Kode Klasifikasi** atau **Jenis Surat**."}]
 
-# --- 4. SIDEBAR ---
-with st.sidebar:
-    st.markdown("### 🏠 Menu Utama")
-    st.write("---")
-    st.caption("PERCAKAPAN")
-    st.button("💬 Chat Aktif", use_container_width=True)
-    
-    st.write("") # Spacer
-    
-    if st.session_state.messages:
-        chat_data = [{"Waktu": datetime.now().strftime("%H:%M"), "Role": m["role"], "Pesan": m["content"]} for m in st.session_state.messages]
-        df_log = pd.DataFrame(chat_data)
-        csv = df_log.to_csv(index=False).encode('utf-8')
-        st.download_button("📥 Download Log Chat", data=csv, file_name="log_chat_kpu.csv", use_container_width=True)
-    
-    if st.button("🗑️ Hapus Riwayat Chat", use_container_width=True, type="secondary"):
-        st.session_state.messages = []
-        st.rerun()
-    
-    st.markdown("<br><br><center><p style='font-size:10px; color:gray;'>Versi 1.1.0 - PKPU 1257</p></center>", unsafe_allow_html=True)
+# --- 4. UI RENDERER ---
+def render_results(results, title):
+    if results:
+        st.subheader(title)
+        for r in results[:3]: # Limit 3 per kategori agar tidak terlalu panjang
+            s = r.get('score', 0)
+            clr = "green" if s > 85 else "orange"
+            with st.expander(f"📍 {r.get('kode', 'N/A')} - {r.get('klasifikasi', 'Detail')}"):
+                st.markdown(f":{clr}[**Relevansi: {s}%**]")
+                st.write(f"**Sifat:** {r.get('sifat', '-')}")
+                st.info(f"**Keterangan:** {r.get('keterangan', '-')}")
+        st.divider()
 
-# --- 5. MAIN HEADER ---
-col_logo, col_text = st.columns([0.07, 0.93])
-with col_logo:
-    st.image("https://upload.wikimedia.org/wikipedia/commons/4/46/KPU_Logo.svg", width=45)
-with col_text:
-    st.markdown("### **Klasifikasi Surat KPU**")
-    st.caption("Basis Data PKPU 1257")
+# --- 5. INTERFACE CHAT ---
+st.title("🤖 DinasChat Pro")
 
-# --- 6. CHAT DISPLAY ---
-if not st.session_state.messages:
-    st.markdown(f"""
-        <div class="welcome-container">
-            <div class="welcome-icon">📄</div>
-            <h2 style='color: #1a237e;'>Klasifikasi Arsip KPU</h2>
-            <p style='color: #666;'>Tanyakan <b>**Kode Klasifikasi**</b> dan <b>**Sifat Naskah**</b><br>
-            (Biasa/Rahasia) berdasarkan PKPU 1257. Silakan ketik<br>
-            perihal surat Anda di bawah ini.</p>
-        </div>
-        """, unsafe_allow_html=True)
-else:
-    for msg in st.session_state.messages:
-        if msg["role"] == "user":
-            st.markdown(f"""
-                <div class="chat-row row-reverse">
-                    <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" class="avatar">
-                    <div class="user-bubble">{msg['content']}</div>
-                </div>
-                """, unsafe_allow_html=True)
-        else:
-            st.markdown(f"""
-                <div class="chat-row">
-                    <img src="https://cdn-icons-png.flaticon.com/512/2593/2593635.png" class="avatar">
-                    <div class="assistant-bubble">
-                        {msg['content']}
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
-            
-            # Tampilkan Expander di bawah bubble asisten jika ada hasil
-            if "res_kode" in msg:
-                for r in msg["res_kode"][:3]:
-                    with st.expander(f"📍 {r.get('kode')} - {r.get('klasifikasi')}"):
-                        st.write(f"**Sifat:** {r.get('sifat')}")
-                        st.info(f"**Keterangan:** {r.get('keterangan')}")
+for msg in st.session_state.messages:
+    with st.chat_message(msg["role"]):
+        st.markdown(msg["content"])
+        if "res_kode" in msg: render_results(msg["res_kode"], "🗂️ Hasil Kode Klasifikasi")
+        if "res_jenis" in msg: render_results(msg["res_jenis"], "📄 Hasil Jenis Naskah")
 
-# --- 7. CHAT INPUT ---
-if prompt := st.chat_input("Contoh: Kode dan sifat surat pelantikan KPPS..."):
+if prompt := st.chat_input("Ketik kata kunci (misal: Kepegawaian)..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
-    
+    with st.chat_message("user"):
+        st.markdown(prompt)
+
+    # Search in both
     res_kode = smart_search(prompt, db_kode, stemmer)
     res_jenis = smart_search(prompt, db_jenis, stemmer)
-    
-    if res_kode or res_jenis:
-        ans = "Tentu, berikut adalah hasil temuan saya berdasarkan **PKPU Nomor 1257**:"
-        st.session_state.messages.append({
-            "role": "assistant", "content": ans,
-            "res_kode": res_kode, "res_jenis": res_jenis
-        })
-    else:
-        st.session_state.messages.append({
-            "role": "assistant", 
-            "content": f"Maaf, saya tidak menemukan data dengan tingkat kecocokan di atas 75% untuk **'{prompt}'**."
-        })
-    st.rerun()
 
-st.markdown("<br><center><p style='color: gray; font-size: 10px;'>Hasil berdasarkan AI. Selalu verifikasi dengan dokumen fisik PKPU 1257.</p></center>", unsafe_allow_html=True)
+    with st.chat_message("assistant"):
+        if res_kode or res_jenis:
+            response_text = "Berikut adalah hasil temuan saya:"
+            st.markdown(response_text)
+            
+            render_results(res_kode, "🗂️ Hasil Kode Klasifikasi")
+            render_results(res_jenis, "📄 Hasil Jenis Naskah")
+            
+            st.session_state.messages.append({
+                "role": "assistant", 
+                "content": response_text,
+                "res_kode": res_kode,
+                "res_jenis": res_jenis
+            })
+        else:
+            suggestion = suggest_correction(prompt, db_kode + db_jenis)
+            error_msg = f"Maaf, tidak ditemukan data untuk **'{prompt}'**."
+            st.error(error_msg)
+            
+            if suggestion:
+                st.markdown(f"💡 Mungkin maksud Anda adalah:")
+                if st.button(f"🔍 Cari: {suggestion}", key="btn_suggest"):
+                    # Fitur Click-to-Search
+                    st.session_state.messages.append({"role": "user", "content": suggestion})
+                    st.rerun()
+            
+            st.session_state.messages.append({"role": "assistant", "content": error_msg})
+    st.rerun()
