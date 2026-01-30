@@ -1,0 +1,122 @@
+[
+    {
+        "kode": "SPt",
+        "klasifikasi": "Surat Perintah (Sprint/Perintah Atasan)",
+        "sifat": "Biasa",
+        "keterangan": "Naskah dinas yang berisi perintah dari atasan kepada bawahan untuk melaksanakan tugas tertentu."
+    },
+    {
+        "kode": "ST",
+        "klasifikasi": "Surat Tugas (Mandat/Penugasan)",
+        "sifat": "Biasa",
+        "keterangan": "Naskah dinas yang berisi penugasan dari pejabat yang berwenang kepada seseorang untuk melaksanakan tugas kedinasan."
+    },
+    {
+        "kode": "ND",
+        "klasifikasi": "Nota Dinas (Internal Memo/Komunikasi Internal)",
+        "sifat": "Biasa",
+        "keterangan": "Alat komunikasi internal antar pejabat atau unit kerja di lingkungan instansi."
+    },
+    {
+        "kode": "LD",
+        "klasifikasi": "Lembar Disposisi (Instruksi Pimpinan/Tindak Lanjut)",
+        "sifat": "Terbatas",
+        "keterangan": "Lembar catatan berisi petunjuk atau instruksi pimpinan terkait penyelesaian surat masuk atau naskah dinas."
+    },
+    {
+        "kode": "MM",
+        "klasifikasi": "Memorandum (Memo/Pesan Singkat Dinas)",
+        "sifat": "Biasa",
+        "keterangan": "Naskah dinas intern yang berisi mengingatkan, menyampaikan informasi, atau petunjuk singkat."
+    },
+    {
+        "kode": "SD",
+        "klasifikasi": "Surat Dinas (Surat Resmi/Korespondensi Eksternal)",
+        "sifat": "Biasa",
+        "keterangan": "Naskah dinas berisi pelaksanaan tugas pejabat dalam menyampaikan informasi dinas kepada pihak luar atau internal."
+    },
+    {
+        "kode": "Und",
+        "klasifikasi": "Surat Undangan (Invitation/Pertemuan/Rapat)",
+        "sifat": "Biasa",
+        "keterangan": "Naskah dinas yang memuat pemberitahuan agar seseorang atau pihak lain menghadiri suatu acara atau rapat."
+    },
+    {
+        "kode": "NK",
+        "klasifikasi": "Nota Kesepahaman (Memorandum of Understanding/MoU)",
+        "sifat": "Biasa",
+        "keterangan": "Dokumen awal yang memuat nota kesepahaman kerjasama antar pihak sebelum dituangkan dalam perjanjian rinci."
+    },
+    {
+        "kode": "PKS",
+        "klasifikasi": "Perjanjian Kerja Sama (Kontrak/MOU Rinci)",
+        "sifat": "Biasa",
+        "keterangan": "Dokumen legal yang mengatur hak dan kewajiban antar pihak dalam suatu lingkup kerjasama tertentu."
+    },
+    {
+        "kode": "SU",
+        "klasifikasi": "Surat Kuasa (Pelimpahan Wewenang/Authorization)",
+        "sifat": "Biasa",
+        "keterangan": "Naskah dinas yang berisi pelimpahan wewenang dari pemberi kuasa kepada penerima kuasa untuk bertindak atas namanya."
+    },
+    {
+        "kode": "BA",
+        "klasifikasi": "Berita Acara (Notulensi Legal/Record of Events)",
+        "sifat": "Biasa",
+        "keterangan": "Naskah dinas yang berisi pernyataan pengesahan atas suatu kejadian, peristiwa, perubahan status, atau serah terima."
+    },
+    {
+        "kode": "Kt",
+        "klasifikasi": "Surat Keterangan (Pernyataan Resmi/Certificate)",
+        "sifat": "Biasa",
+        "keterangan": "Naskah dinas yang berisi informasi mengenai hal atau seseorang untuk kepentingan kedinasan."
+    },
+    {
+        "kode": "SR",
+        "klasifikasi": "Surat Pengantar (Cover Letter/Forwarding)",
+        "sifat": "Biasa",
+        "keterangan": "Naskah dinas yang digunakan untuk mengantar naskah dinas atau barang lain."
+    },
+    {
+        "kode": "Pu",
+        "klasifikasi": "Pengumuman (Public Notice/Maklumat)",
+        "sifat": "Biasa",
+        "keterangan": "Naskah dinas yang berisi pemberitahuan yang bersifat umum atau ditujukan kepada banyak pihak."
+    },
+    {
+        "kode": "Sg",
+        "klasifikasi": "Surat Panggilan (Summons/Panggilan Resmi)",
+        "sifat": "Biasa",
+        "keterangan": "Naskah dinas untuk memanggil pejabat/pegawai atau pihak lain guna dimintai keterangan atau keperluan dinas."
+    },
+    {
+        "kode": "Rk",
+        "klasifikasi": "Rekomendasi (Saran Profesional/Advisory)",
+        "sifat": "Biasa",
+        "keterangan": "Naskah dinas berisi saran atau penilaian dari pejabat yang berwenang mengenai suatu hal atau orang."
+    },
+    {
+        "kode": "SP",
+        "klasifikasi": "Surat Peringatan (Teguran/Warning Letter)",
+        "sifat": "Terbatas",
+        "keterangan": "Naskah dinas berisi teguran atas pelanggaran ketentuan atau penurunan kinerja."
+    },
+    {
+        "kode": "LP",
+        "klasifikasi": "Laporan (Report/Akuntabilitas)",
+        "sifat": "Biasa",
+        "keterangan": "Naskah dinas yang berisi penyampaian informasi mengenai hasil pelaksanaan tugas atau kondisi tertentu."
+    },
+    {
+        "kode": "Tl",
+        "klasifikasi": "Telaah (Telaahan Staf/Staff Paper)",
+        "sifat": "Biasa",
+        "keterangan": "Analisis atau tinjauan mendalam mengenai suatu persoalan beserta saran tindakan bagi pimpinan."
+    },
+    {
+        "kode": "NT",
+        "klasifikasi": "Notula (Catatan Rapat/Minutes of Meeting)",
+        "sifat": "Biasa",
+        "keterangan": "Catatan singkat mengenai jalannya persidangan atau rapat beserta keputusan yang diambil."
+    }
+]

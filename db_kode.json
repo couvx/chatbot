@@ -1,0 +1,932 @@
+[
+    {
+    "kode": "PP.01",
+    "klasifikasi": "Perencanaan Program dan Anggaran (Pemilu/Pemilihan/Budgeting)",
+    "sifat": "Biasa",
+    "keterangan": "Penyusunan rencana kerja, program strategis, dan alokasi anggaran belanja untuk pelaksanaan Pemilu dan Pemilihan Kepala Daerah."
+    },
+    {
+    "kode": "PP.01.1",
+    "klasifikasi": "Perencanaan Program dan Anggaran Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen spesifik terkait tahapan perencanaan dan rincian biaya operasional Pemilu Legislatif dan Presiden."
+    },
+    {
+    "kode": "PP.01.2",
+    "klasifikasi": "Perencanaan Program dan Anggaran Pemilihan",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen perencanaan dan penganggaran (hibah/APBD) untuk Pemilihan Gubernur, Bupati, dan Walikota (Pilkada)."
+    },
+    {
+    "kode": "PP.02",
+    "klasifikasi": "Penataan Organisasi dan Tata Kerja",
+    "sifat": "Biasa",
+    "keterangan": "Pengaturan struktur organisasi, uraian tugas, dan koordinasi kelembagaan di lingkungan penyelenggara pemilu."
+    },
+    {
+    "kode": "PP.02.1",
+    "klasifikasi": "Penataan Organisasi Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Struktur tugas dan fungsi organisasi khusus dalam masa tahapan Pemilu."
+    },
+    {
+    "kode": "PP.02.2",
+    "klasifikasi": "Penataan Organisasi Pemilihan",
+    "sifat": "Biasa",
+    "keterangan": "Struktur tugas dan fungsi organisasi dalam masa tahapan Pemilihan/Pilkada."
+    },
+    {
+    "kode": "PP.03",
+    "klasifikasi": "Pendaftaran Pemantau dan Pemantauan",
+    "sifat": "Biasa",
+    "keterangan": "Registrasi lembaga pemantau, akreditasi pemantau asing/dalam negeri, dan laporan hasil pengamatan lapangan."
+    },
+    {
+    "kode": "PP.03.1",
+    "klasifikasi": "Pendaftaran Pemantau dan Pemantauan Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Administrasi pendaftaran dan pelaporan pemantau untuk tahapan Pemilihan Umum."
+    },
+    {
+    "kode": "PP.03.2",
+    "klasifikasi": "Pendaftaran Pemantau dan Pemantauan Pemilihan",
+    "sifat": "Biasa",
+    "keterangan": "Administrasi pendaftaran dan pelaporan pemantau untuk tahapan Pilkada/Pemilihan."
+    },
+    {
+    "kode": "PP.04",
+    "klasifikasi": "Pembentukan Badan Penyelenggara (Ad Hoc)",
+    "sifat": "Biasa",
+    "keterangan": "Rekrutmen dan penetapan anggota PPK, PPS, KPPS, dan Pantarlih serta sekretariat pendukung."
+    },
+    {
+    "kode": "PP.04.1",
+    "klasifikasi": "Pembentukan Badan Penyelenggara Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Seleksi, penetapan, dan pengangkatan badan ad hoc khusus masa Pemilu."
+    },
+    {
+    "kode": "PP.04.2",
+    "klasifikasi": "Pembentukan Badan Penyelenggara Pemilihan",
+    "sifat": "Biasa",
+    "keterangan": "Seleksi, penetapan, dan pengangkatan badan ad hoc khusus masa Pilkada."
+    },
+    {
+    "kode": "PP.05",
+    "klasifikasi": "Rapat Kerja dan Rapat Koordinasi (Rakor/Raker)",
+    "sifat": "Biasa",
+    "keterangan": "Notulensi dan dokumentasi pertemuan koordinasi antar tingkatan KPU (RI, Provinsi, Kab/Kota) dan stakeholder."
+    },
+    {
+    "kode": "PP.05.1",
+    "klasifikasi": "Rapat Kerja dan Koordinasi Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Kegiatan koordinasi teknis yang berkaitan dengan persiapan tahapan Pemilu."
+    },
+    {
+    "kode": "PP.05.2",
+    "klasifikasi": "Rapat Kerja dan Koordinasi Pemilihan",
+    "sifat": "Biasa",
+    "keterangan": "Kegiatan koordinasi teknis yang berkaitan dengan persiapan tahapan Pemilihan/Pilkada."
+    },
+    {
+    "kode": "PP.06",
+    "klasifikasi": "Sosialisasi, Bimtek, Penyuluhan, Publikasi, dan Pendidikan Pemilih",
+    "sifat": "Biasa",
+    "keterangan": "Penyebarluasan informasi, bimbingan teknis penyelenggara, kampanye pendidikan pemilih, dan iklan layanan masyarakat."
+    },
+    {
+    "kode": "PP.06.1",
+    "klasifikasi": "Sosialisasi dan Pendidikan Pemilih Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Pemberian materi edukasi dan bimbingan teknis untuk meningkatkan partisipasi pada Pemilu."
+    },
+    {
+    "kode": "PP.06.2",
+    "klasifikasi": "Sosialisasi dan Pendidikan Pemilih Pemilihan",
+    "sifat": "Biasa",
+    "keterangan": "Pemberian materi edukasi dan bimbingan teknis untuk meningkatkan partisipasi pada Pilkada."
+    },
+    {
+    "kode": "PP.07",
+    "klasifikasi": "Pengelolaan Data dan Informasi (Data Center/Sistem Informasi)",
+    "sifat": "Terbatas",
+    "keterangan": "Manajemen basis data penyelenggaraan, pemeliharaan server, dan pengelolaan aplikasi sistem informasi."
+    },
+    {
+    "kode": "PP.07.1",
+    "klasifikasi": "Pengelolaan Data dan Informasi Pemilu",
+    "sifat": "Terbatas",
+    "keterangan": "Arsip digital dan fisik terkait data hasil olahan informasi selama tahapan Pemilu."
+    },
+    {
+    "kode": "PP.07.2",
+    "klasifikasi": "Pengelolaan Data dan Informasi Pemilihan",
+    "sifat": "Terbatas",
+    "keterangan": "Arsip digital dan fisik terkait data hasil olahan informasi selama tahapan Pemilihan."
+    },
+    {
+    "kode": "PP.08",
+    "klasifikasi": "Logistik Penyelenggaraan Pemilu (Sarana Prasarana/Perlengkapan)",
+    "sifat": "Biasa",
+    "keterangan": "Manajemen rantai pasok perlengkapan pemungutan suara, kotak suara, surat suara, dan tinta untuk Pemilu."
+    },
+    {
+    "kode": "PP.08.1",
+    "klasifikasi": "Data dan Dokumentasi Kebutuhan Sarana Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Inventarisasi dan perencanaan jumlah kebutuhan logistik di setiap TPS/wilayah."
+    },
+    {
+    "kode": "PP.08.2",
+    "klasifikasi": "Standar Barang/Jasa Sarana Prasarana Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Spesifikasi teknis dan standarisasi kualitas barang logistik Pemilu."
+    },
+    {
+    "kode": "PP.08.3",
+    "klasifikasi": "Administrasi dan Alokasi Sarana Prasarana Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Tata usaha pengadaan dan pembagian jatah logistik ke wilayah-wilayah."
+    },
+    {
+    "kode": "PP.08.4",
+    "klasifikasi": "Distribusi Sarana dan Prasarana Pemilu (Angkutan)",
+    "sifat": "Biasa",
+    "keterangan": "Pengiriman logistik melalui jalur reguler atau khusus ke daerah terpencil/terluar."
+    },
+    {
+    "kode": "PP.08.5",
+    "klasifikasi": "Penyimpanan Sarana Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Manajemen gudang dan pengamanan logistik sebelum didistribusikan ke TPS."
+    },
+    {
+    "kode": "PP.09",
+    "klasifikasi": "Logistik Penyelenggaraan Pemilihan (Sarana Prasarana Pilkada)",
+    "sifat": "Biasa",
+    "keterangan": "Manajemen perlengkapan pemungutan suara khusus untuk Pemilihan Kepala Daerah."
+    },
+    {
+    "kode": "PP.09.1",
+    "klasifikasi": "Data dan Dokumentasi Kebutuhan Sarana Pemilihan",
+    "sifat": "Biasa",
+    "keterangan": "Inventarisasi dan perencanaan jumlah kebutuhan logistik Pilkada."
+    },
+    {
+    "kode": "PP.09.2",
+    "klasifikasi": "Standar Barang/Jasa Sarana Prasarana Pemilihan",
+    "sifat": "Biasa",
+    "keterangan": "Spesifikasi teknis barang logistik untuk kebutuhan Pilkada."
+    },
+    {
+    "kode": "PP.09.3",
+    "klasifikasi": "Administrasi dan Alokasi Sarana Prasarana Pemilihan",
+    "sifat": "Biasa",
+    "keterangan": "Penatausahaan dan penetapan jumlah logistik per wilayah pemilihan."
+    },
+    {
+    "kode": "PP.09.4",
+    "klasifikasi": "Distribusi Sarana dan Prasarana Pemilihan (Transportasi)",
+    "sifat": "Biasa",
+    "keterangan": "Mobilisasi pengiriman logistik Pilkada ke tingkat kecamatan dan desa."
+    },
+    {
+    "kode": "PP.09.5",
+    "klasifikasi": "Penyimpanan Sarana Pemilihan",
+    "sifat": "Biasa",
+    "keterangan": "Tata kelola pergudangan logistik Pilkada di tingkat daerah."
+    },
+    {
+    "kode": "PL.01",
+    "klasifikasi": "Pelaksanaan Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Seluruh rangkaian tahapan pelaksanaan Pemilihan Umum untuk anggota legislatif dan Presiden."
+    },
+    {
+    "kode": "PL.01.1",
+    "klasifikasi": "Pendaftaran, Verifikasi dan Penetapan Peserta Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Proses pendaftaran partai politik, verifikasi administrasi, verifikasi faktual, dan penetapan parpol peserta pemilu."
+    },
+    {
+    "kode": "PL.01.2",
+    "klasifikasi": "Pemutakhiran Data Pemilih dan Penyusunan Daftar Pemilih",
+    "sifat": "Biasa",
+    "keterangan": "Penyusunan daftar pemilih tetap (DPT), daftar pemilih sementara (DPS), pantarlih, dan pencocokan penelitian (coklit)."
+    },
+    {
+    "kode": "PL.01.3",
+    "klasifikasi": "Penetapan Jumlah Kursi dan Penetapan Daerah Pemilihan",
+    "sifat": "Biasa",
+    "keterangan": "Penentuan alokasi kursi parlemen dan pembagian wilayah daerah pemilihan (Dapil) tingkat nasional dan daerah."
+    },
+    {
+    "kode": "PL.01.4",
+    "klasifikasi": "Pencalonan",
+    "sifat": "Biasa",
+    "keterangan": "Tahap pendaftaran calon anggota legislatif DPR, DPD, DPRD serta pasangan calon Presiden dan Wakil Presiden."
+    },
+    {
+    "kode": "PL.01.5",
+    "klasifikasi": "Penetapan Calon Anggota DPR, DPD, DPRD dan Pasangan Calon Presiden dan Wakil Presiden serta Penetapan Nomor Urut",
+    "sifat": "Biasa",
+    "keterangan": "Pengumuman resmi daftar calon tetap (DCT) legislatif dan eksekutif serta pengundian nomor urut peserta."
+    },
+    {
+    "kode": "PL.01.6",
+    "klasifikasi": "Kampanye",
+    "sifat": "Biasa",
+    "keterangan": "Masa sosialisasi, rapat umum, iklan media massa, dan penyampaian visi misi program oleh peserta pemilu."
+    },
+    {
+    "kode": "PL.01.7",
+    "klasifikasi": "Dana Kampanye",
+    "sifat": "Biasa",
+    "keterangan": "Laporan awal dana kampanye (LADK), laporan penerimaan dan pengeluaran dana kampanye (LPPDK), serta audit akuntan publik."
+    },
+    {
+    "kode": "PL.01.8",
+    "klasifikasi": "Pemungutan, Penghitungan, dan Rekapitulasi Hasil Penghitungan Perolehan Suara",
+    "sifat": "Biasa",
+    "keterangan": "Proses pencoblosan di TPS, hitung suara, dan rekapitulasi berjenjang dari tingkat kecamatan hingga nasional."
+    },
+    {
+    "kode": "PL.01.9",
+    "klasifikasi": "Penetapan Calon Terpilih",
+    "sifat": "Biasa",
+    "keterangan": "Keputusan resmi mengenai pemenang pemilu dan perolehan kursi berdasarkan hasil akhir rekapitulasi."
+    },
+    {
+    "kode": "PL.01.10",
+    "klasifikasi": "Sumpah/Janji Anggota DPR, DPD, DPRD, Presiden dan Wakil Presiden",
+    "sifat": "Biasa",
+    "keterangan": "Pelantikan resmi, pengucapan sumpah jabatan, dan peresmian pejabat negara hasil pemilu."
+    },
+    {
+    "kode": "PL.02",
+    "klasifikasi": "Pelaksanaan Pemilihan",
+    "sifat": "Biasa",
+    "keterangan": "Pelaksanaan Pemilihan Kepala Daerah (Pilkada) untuk Gubernur, Bupati, dan Walikota secara serentak."
+    },
+    {
+    "kode": "PL.02.1",
+    "klasifikasi": "Pemutakhiran dan Penyusunan Daftar Pemilih",
+    "sifat": "Biasa",
+    "keterangan": "Proses updating data pemilih khusus untuk pemilihan kepala daerah atau Pilkada di tingkat kabupaten/kota dan provinsi."
+    },
+    {
+    "kode": "PL.02.2",
+    "klasifikasi": "Pencalonan",
+    "sifat": "Biasa",
+    "keterangan": "Pendaftaran pasangan calon kepala daerah baik melalui jalur partai politik maupun jalur perseorangan (independen)."
+    },
+    {
+    "kode": "PL.02.3",
+    "klasifikasi": "Penetapan Pasangan Calon Gubernur dan Wakil Gubernur, Bupati dan Wakil Bupati, serta Walikota dan Wakil Walikota dan Penetapan Nomor Urut",
+    "sifat": "Biasa",
+    "keterangan": "Penetapan resmi pasangan calon (Paslon) kepala daerah oleh KPU Provinsi atau KPU Kabupaten/Kota."
+    },
+    {
+    "kode": "PL.02.4",
+    "klasifikasi": "Kampanye",
+    "sifat": "Biasa",
+    "keterangan": "Kegiatan kampanye dialogis, debat publik, dan pemasangan alat peraga kampanye (APK) untuk pemilihan lokal."
+    },
+    {
+    "kode": "PL.02.5",
+    "klasifikasi": "Dana Kampanye",
+    "sifat": "Biasa",
+    "keterangan": "Pelaporan dan pembatasan dana kampanye untuk pasangan calon di tingkat daerah."
+    },
+    {
+    "kode": "PL.02.6",
+    "klasifikasi": "Pemungutan, Penghitungan Suara, dan Rekapitulasi Hasil Penghitungan Perolehan Suara",
+    "sifat": "Biasa",
+    "keterangan": "Pelaksanaan pungut hitung di TPS serta rekapitulasi suara hasil pemilihan kepala daerah."
+    },
+    {
+    "kode": "PL.02.7",
+    "klasifikasi": "Penetapan Calon Terpilih",
+    "sifat": "Biasa",
+    "keterangan": "Pengumuman pemenang Pilkada setelah selesainya masa sengketa atau rekapitulasi akhir."
+    },
+    {
+    "kode": "PY.01",
+    "klasifikasi": "Penyelesaian Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Kegiatan penyelesaian seluruh proses pasca Pemilu, meliputi sengketa, laporan, arsip, dokumentasi, evaluasi, dan pertanggungjawaban penyelenggaraan Pemilu."
+    },
+    {
+    "kode": "PY.01.1",
+    "klasifikasi": "Sengketa Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Penanganan dan penyelesaian sengketa hasil Pemilu, perselisihan proses Pemilu, keberatan peserta, gugatan, dan tindak lanjut putusan lembaga berwenang."
+    },
+    {
+    "kode": "PY.01.2",
+    "klasifikasi": "Penyusunan Laporan Keuangan Penyelenggaraan Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Penyusunan, pengelolaan, dan pelaporan keuangan Pemilu, termasuk realisasi anggaran, pertanggungjawaban dana, audit, dan pelaporan keuangan Pemilu."
+    },
+    {
+    "kode": "PY.01.3",
+    "klasifikasi": "Pengelolaan Arsip Penyelenggaraan Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Pengelolaan arsip Pemilu berupa dokumen administrasi, arsip fisik dan digital, data penyelenggaraan, berita acara, serta penyimpanan dan pemeliharaan arsip Pemilu."
+    },
+    {
+    "kode": "PY.01.4",
+    "klasifikasi": "Penyusunan Dokumentasi Penyelenggaraan Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Penyusunan dokumentasi kegiatan Pemilu meliputi foto, video, laporan kegiatan, dokumentasi tahapan, publikasi, dan bahan pertanggungjawaban penyelenggaraan Pemilu."
+    },
+    {
+    "kode": "PY.01.5",
+    "klasifikasi": "Evaluasi dan Pelaporan Penyelenggaraan Pemilu",
+    "sifat": "Biasa",
+    "keterangan": "Evaluasi pelaksanaan tahapan Pemilu, analisis kinerja penyelenggara, penyusunan laporan akhir, rekomendasi perbaikan, dan pembelajaran penyelenggaraan Pemilu."
+    },
+    {
+    "kode": "PY.02",
+    "klasifikasi": "Penyelesaian Pemilihan",
+    "sifat": "Biasa",
+    "keterangan": "Kegiatan penyelesaian seluruh proses pasca Pemilihan Kepala Daerah (Pilkada), termasuk sengketa, evaluasi, dan pelaporan penyelenggaraan Pemilihan."
+    },
+    {
+    "kode": "PY.02.1",
+    "klasifikasi": "Sengketa Pemilihan",
+    "sifat": "Biasa",
+    "keterangan": "Penanganan dan penyelesaian sengketa hasil Pemilihan atau Pilkada, perselisihan antar peserta, gugatan hasil, dan tindak lanjut putusan hukum."
+    },
+    {
+    "kode": "PY.02.2",
+    "klasifikasi": "Evaluasi dan Pelaporan Penyelenggaraan Pemilihan",
+    "sifat": "Biasa",
+    "keterangan": "Evaluasi pelaksanaan Pemilihan Kepala Daerah, analisis tahapan Pilkada, penyusunan laporan akhir, rekomendasi perbaikan, dan dokumentasi hasil Pemilihan."
+    },
+    {
+    "kode": "PAW.01",
+    "klasifikasi": "Penggantian Antar Waktu dan Pengisian Anggota DPR, DPD, dan DPRD",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas dan proses administrasi terkait Penggantian Antar Waktu (PAW) serta pengisian keanggotaan lembaga perwakilan rakyat DPR, DPD, dan DPRD."
+    },
+    {
+    "kode": "PAW.01.1",
+    "klasifikasi": "Penggantian Antar Waktu (PAW)",
+    "sifat": "Biasa",
+    "keterangan": "Proses penggantian anggota DPR, DPD, dan DPRD antar waktu akibat pengunduran diri, meninggal dunia, pemberhentian, atau alasan lain sesuai ketentuan peraturan perundang-undangan."
+    },
+    {
+    "kode": "PAW.01.2",
+    "klasifikasi": "Pengisian Keanggotaan DPR, DPD, dan DPRD",
+    "sifat": "Biasa",
+    "keterangan": "Proses pengisian keanggotaan DPR, DPD, dan DPRD, termasuk penetapan calon pengganti, administrasi pengangkatan, pelantikan, dan penyesuaian keanggotaan lembaga perwakilan."
+    },
+    {
+    "kode": "PR.01",
+    "klasifikasi": "Pokok-Pokok Kebijakan",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas perencanaan yang memuat arah kebijakan, prioritas pembangunan, dan kerangka strategis organisasi atau lembaga."
+    },
+    {
+    "kode": "PR.01.1",
+    "klasifikasi": "Rencana Pembangunan Jangka Panjang (RPJP)",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen perencanaan jangka panjang yang memuat visi, misi, dan arah pembangunan strategis dalam periode panjang."
+    },
+    {
+    "kode": "PR.01.2",
+    "klasifikasi": "Rencana Pembangunan Jangka Menengah (RPJM)",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen perencanaan jangka menengah yang memuat sasaran, program, dan kebijakan pembangunan dalam periode menengah."
+    },
+    {
+    "kode": "PR.01.3",
+    "klasifikasi": "Rencana Strategis (Renstra)",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen perencanaan strategis lembaga yang memuat tujuan, sasaran, indikator kinerja, dan strategi pencapaian kinerja."
+    },
+    {
+    "kode": "PR.02",
+    "klasifikasi": "Rencana Kerja Tahunan",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas yang berkaitan dengan perencanaan kerja tahunan, penjabaran program, kegiatan, dan anggaran tahunan."
+    },
+    {
+    "kode": "PR.02.1",
+    "klasifikasi": "Usulan Unit Kerja dan Dokumen Pendukung Rencana Kerja",
+    "sifat": "Biasa",
+    "keterangan": "Naskah usulan unit kerja termasuk Kerangka Acuan Kerja (KAK), Rencana Anggaran Biaya (RAB), dan Satuan Kerja beserta data pendukung."
+    },
+    {
+    "kode": "PR.02.2",
+    "klasifikasi": "Usulan Kegiatan Lembaga",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen usulan kegiatan lembaga sebagai dasar penyusunan rencana kerja dan penganggaran."
+    },
+    {
+    "kode": "PR.02.3",
+    "klasifikasi": "Rencana Kerja Tahunan",
+    "sifat": "Biasa",
+    "keterangan": "Naskah perencanaan kerja tahunan yang disusun sejak penetapan pagu indikatif sampai dengan penetapan Rencana Kerja."
+    },
+    {
+    "kode": "PR.02.4",
+    "klasifikasi": "Rencana Kerja Berdasarkan Pagu Indikatif",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen rencana kerja yang disusun berdasarkan pagu indikatif sebagai dasar perencanaan dan penganggaran."
+    },
+    {
+    "kode": "PR.03",
+    "klasifikasi": "Penetapan dan Kontrak Kinerja",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait penetapan kinerja, kontrak kinerja, dan pelaporan kinerja instansi pemerintah."
+    },
+    {
+    "kode": "PR.03.1",
+    "klasifikasi": "Penetapan Kinerja dan LAKIP Lembaga/KPU",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen Penetapan Kinerja (TAPKIN) dan Laporan Kinerja Instansi Pemerintah (LAKIP) pada tingkat lembaga atau KPU."
+    },
+    {
+    "kode": "PR.03.2",
+    "klasifikasi": "Penetapan dan Kontrak Kinerja Pimpinan Tinggi Utama dan Madya",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen penetapan dan kontrak kinerja bagi pejabat pimpinan tinggi utama dan madya."
+    },
+    {
+    "kode": "PR.03.3",
+    "klasifikasi": "Penetapan dan Kontrak Kinerja Pimpinan Tinggi Pratama",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen penetapan dan kontrak kinerja bagi pejabat pimpinan tinggi pratama."
+    },
+    {
+    "kode": "PR.04",
+    "klasifikasi": "Laporan",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas berupa laporan pelaksanaan kegiatan, kinerja, dan penyelenggaraan tugas lembaga."
+    },
+    {
+    "kode": "PR.04.1",
+    "klasifikasi": "Laporan Berkala",
+    "sifat": "Biasa",
+    "keterangan": "Laporan berkala yang meliputi laporan triwulan, laporan semester, dan laporan tahunan."
+    },
+    {
+    "kode": "PR.04.2",
+    "klasifikasi": "Laporan Insidental",
+    "sifat": "Biasa",
+    "keterangan": "Laporan yang disusun sewaktu-waktu sesuai kebutuhan atau permintaan pimpinan."
+    },
+    {
+    "kode": "PR.05",
+    "klasifikasi": "Dokumen Rapat Dengar Pendapat (RDP)",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dan dokumen yang berkaitan dengan pelaksanaan Rapat Dengar Pendapat, termasuk risalah, bahan paparan, dan kesimpulan rapat."
+    },
+    {
+    "kode": "PR.06",
+    "klasifikasi": "Evaluasi Program",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen evaluasi program yang meliputi evaluasi program unit kerja dan evaluasi program lembaga secara keseluruhan."
+    },
+    {
+    "kode": "HK.01",
+    "klasifikasi": "Program Legislasi",
+    "sifat": "Biasa",
+    "keterangan": "Penyusunan rencana regulasi, daftar rancangan peraturan, prolegnas, dan perencanaan hukum strategis."
+    },
+    {
+    "kode": "HK.02",
+    "klasifikasi": "Peraturan KPU",
+    "sifat": "Penting",
+    "keterangan": "Penyusunan rancangan PKPU, Focus Group Discussion (FGD), uji publik, konsultasi DPR, konsinyering, harmonisasi Kemenkumham, penetapan, dan pengundangan lembaran negara."
+    },
+    {
+    "kode": "HK.03",
+    "klasifikasi": "Keputusan KPU dan Sekretariat",
+    "sifat": "Biasa",
+    "keterangan": "Produk hukum bersifat penetapan (beschikking), non-tahapan pemilu, keputusan administratif KPU Pusat, Provinsi, maupun Kabupaten/Kota."
+    },
+    {
+    "kode": "HK.03.1",
+    "klasifikasi": "Keputusan KPU, KPU Provinsi, dan KPU Kabupaten/Kota",
+    "sifat": "Biasa",
+    "keterangan": "Surat keputusan lembaga komisioner di tingkat pusat dan daerah terkait kebijakan operasional non-tahapan."
+    },
+    {
+    "kode": "HK.03.2",
+    "klasifikasi": "Keputusan Sekretaris Jenderal KPU, Sekretaris KPU Provinsi, dan Sekretaris KPU Kabupaten/Kota",
+    "sifat": "Biasa",
+    "keterangan": "Keputusan manajerial kesekretariatan, administrasi internal, kepegawaian, dan pengelolaan keuangan satker."
+    },
+    {
+    "kode": "HK.04",
+    "klasifikasi": "Instruksi / Surat Edaran",
+    "sifat": "Biasa",
+    "keterangan": "Pedoman pelaksanaan tugas, arahan kebijakan (policy), surat edaran (SE) untuk standarisasi kerja di lingkungan KPU."
+    },
+    {
+    "kode": "HK.04.1",
+    "klasifikasi": "Instruksi/Surat Edaran KPU, KPU Provinsi, dan KPU Kabupaten/Kota",
+    "sifat": "Biasa",
+    "keterangan": "Petunjuk teknis dan instruksi pimpinan lembaga kepada jajaran di bawahnya terkait kebijakan hukum."
+    },
+    {
+    "kode": "HK.04.2",
+    "klasifikasi": "Surat Edaran Sekretaris Jenderal/Sekretaris KPU Daerah",
+    "sifat": "Biasa",
+    "keterangan": "Edaran administratif kesekretariatan mengenai tata kelola kantor dan layanan dukungan pemilu."
+    },
+    {
+    "kode": "HK.05",
+    "klasifikasi": "Nota Kesepahaman / Memorandum of Understanding (MoU)",
+    "sifat": "Biasa",
+    "keterangan": "Kerja sama antar lembaga, perjanjian kemitraan, telaah hukum, draf awal (drafting) hingga naskah akhir perjanjian kerja sama (PKS)."
+    },
+    {
+    "kode": "HK.05.1",
+    "klasifikasi": "Nota Kesepahaman (MoU) Dalam Negeri",
+    "sifat": "Biasa",
+    "keterangan": "Kolaborasi dengan instansi pemerintah pusat, daerah, universitas, atau organisasi domestik."
+    },
+    {
+    "kode": "HK.05.2",
+    "klasifikasi": "Nota Kesepahaman (MoU) Luar Negeri",
+    "sifat": "Biasa",
+    "keterangan": "Kerja sama internasional, donor luar negeri, dan pertukaran informasi dengan lembaga pemilu negara lain."
+    },
+    {
+    "kode": "HK.06",
+    "klasifikasi": "Sosialisasi / Penyuluhan Pembinaan Hukum",
+    "sifat": "Biasa",
+    "keterangan": "Penyebarluasan informasi hukum, edukasi pemilih, pembinaan produk hukum, dan kegiatan literasi regulasi."
+    },
+    {
+    "kode": "HK.07",
+    "klasifikasi": "Bantuan / Konsultasi Hukum / Advokasi",
+    "sifat": "Penting",
+    "keterangan": "Penanganan kasus hukum, sengketa pemilu, pelanggaran administrasi, pelanggaran kode etik, dan kajian telaah hukum perkara."
+    },
+    {
+    "kode": "HK.07.1",
+    "klasifikasi": "Advokasi Pidana (PN / PT / Mahkamah Agung)",
+    "sifat": "Rahasia/Penting",
+    "keterangan": "Pendampingan hukum perkara tindak pidana pemilu atau umum di Pengadilan Negeri, Tinggi, atau Kasasi."
+    },
+    {
+    "kode": "HK.07.2",
+    "klasifikasi": "Advokasi Perdata (PN / PT / Mahkamah Agung)",
+    "sifat": "Biasa",
+    "keterangan": "Gugatan perdata, sengketa aset, atau wanprestasi di lembaga peradilan umum."
+    },
+    {
+    "kode": "HK.07.3",
+    "klasifikasi": "Advokasi Tata Usaha Negara (PTUN / PTTUN / MA)",
+    "sifat": "Penting",
+    "keterangan": "Sengketa pembatalan keputusan KPU (beschikking) di Pengadilan Tata Usaha Negara."
+    },
+    {
+    "kode": "HK.07.4",
+    "klasifikasi": "Perkara Kode Etik (DKPP)",
+    "sifat": "Penting",
+    "keterangan": "Sidang pelanggaran etik penyelenggara pemilu di Dewan Kehormatan Penyelenggara Pemilu."
+    },
+    {
+    "kode": "HK.07.5",
+    "klasifikasi": "Perselisihan Hasil Pemilihan Umum (Mahkamah Konstitusi)",
+    "sifat": "Sangat Penting",
+    "keterangan": "Sengketa PHPU, gugatan hasil suara, sidang MK, dan pembuktian perolehan suara."
+    },
+    {
+    "kode": "HK.07.6",
+    "klasifikasi": "Sengketa Proses / Administrasi (Bawaslu)",
+    "sifat": "Penting",
+    "keterangan": "Laporan pelanggaran administrasi pemilu dan penyelesaian sengketa proses di Badan Pengawas Pemilu."
+    },
+    {
+    "kode": "HK.07.7",
+    "klasifikasi": "Pendampingan Aparat Penegak Hukum (Polri, Kejaksaan, KPK)",
+    "sifat": "Penting",
+    "keterangan": "Koordinasi penegakan hukum, klarifikasi kasus korupsi, atau penyelidikan bersama kepolisian dan jaksa."
+    },
+    {
+    "kode": "ORT.01",
+    "klasifikasi": "Struktur Organisasi di Lingkungan Lembaga Negara dan Badan Pemerintah/Instansi",
+    "sifat": "Biasa",
+    "keterangan": "Reka bentuk hierarki, susunan organisasi pusat dan daerah, serta bagan struktur lembaga pemerintah."
+    },
+    {
+    "kode": "ORT.01.1",
+    "klasifikasi": "Pembentukan (SOTK Tipologi KPU Provinsi)",
+    "sifat": "Penting",
+    "keterangan": "Penyusunan awal Susunan Organisasi dan Tata Kerja (SOTK), penetapan tipologi wilayah, dan struktur baru KPU di tingkat provinsi."
+    },
+    {
+    "kode": "ORT.01.2",
+    "klasifikasi": "Pengubahan (SOTK Tipologi KPU Provinsi)",
+    "sifat": "Biasa",
+    "keterangan": "Revisi struktur organisasi, perubahan tipologi satker, penyesuaian bagan organisasi, dan kemas kini tata kerja provinsi."
+    },
+    {
+    "kode": "ORT.02",
+    "klasifikasi": "Uraian Jabatan dan Tata Kerja",
+    "sifat": "Biasa",
+    "keterangan": "Deskripsi kerja (job description), pembagian tugas kakitangan, prosedur hubungan kerja, dan mekanisme koordinasi antara unit."
+    },
+    {
+    "kode": "ORT.03",
+    "klasifikasi": "Standar Kompetensi Jabatan Manajerial dan Fungsional",
+    "sifat": "Biasa",
+    "keterangan": "Kriteria kelayakan jawatan, spesifikasi keahlian, standard profil kompetensi untuk jawatan pimpinan dan teknis."
+    },
+    {
+    "kode": "ORT.04",
+    "klasifikasi": "Evaluasi Kelembagaan",
+    "sifat": "Biasa",
+    "keterangan": "Penilaian prestasi organisasi, audit keberkesanan struktur, dan tinjauan berkala terhadap fungsi unit kerja."
+    },
+    {
+    "kode": "ORT.05",
+    "klasifikasi": "Peta Proses Bisnis",
+    "sifat": "Biasa",
+    "keterangan": "Alur kerja utama (business process), diagram interaksi antara bahagian, dan pemetaan proses perkhidmatan lembaga."
+    },
+    {
+    "kode": "ORT.06",
+    "klasifikasi": "Standar Operasional Prosedur (SOP)",
+    "sifat": "Biasa",
+    "keterangan": "Prosedur tetap nasional/regional/internasional, draf awal hingga akhir petunjuk teknis pelaksanaan tugas, dan standardisasi kerja."
+    },
+    {
+    "kode": "ORT.07",
+    "klasifikasi": "Reformasi Birokrasi",
+    "sifat": "Penting",
+    "keterangan": "Kegiatan transformasi birokrasi, naskah pembentukan pelaksanaan, dokumen evaluasi kemajuan (PMPRB), dan zon integriti."
+    },
+    {
+    "kode": "ORT.08",
+    "klasifikasi": "Pelayanan Publik di Lingkungan Negara dan Badan Pemerintah/Instansi",
+    "sifat": "Biasa",
+    "keterangan": "Pengurusan perkhidmatan kepada masyarakat, tadbir urus perkhidmatan awam, dan kepuasan pelanggan."
+    },
+    {
+    "kode": "ORT.08.1",
+    "klasifikasi": "Pedoman Standar Pelayanan",
+    "sifat": "Biasa",
+    "keterangan": "Panduan baku pemberian layanan, maklumat perkhidmatan, dan penetapan janji perkhidmatan awam."
+    },
+    {
+    "kode": "ORT.08.2",
+    "klasifikasi": "Hasil Evaluasi Pelayanan Publik",
+    "sifat": "Biasa",
+    "keterangan": "Laporan penilaian kualiti perkhidmatan, indeks kepuasan masyarakat (IKM), dan pemantauan kualiti layanan."
+    },
+    {
+    "kode": "ORT.09",
+    "klasifikasi": "Sertifikat Manajemen Mutu Organisasi (ISO)",
+    "sifat": "Penting",
+    "keterangan": "Dokumen pensijilan antarabangsa, standard ISO, audit kualiti luaran, dan pengiktirafan kualiti pengurusan."
+    },
+    {
+    "kode": "ORT.10",
+    "klasifikasi": "Analisis Jabatan dan Beban Kerja KPU, KPU Provinsi, dan KPU Kabupaten/Kota",
+    "sifat": "Biasa",
+    "keterangan": "Kajian keperluan jawatan, pengiraan beban tugas anggota, dan keberkesanan jumlah sumber manusia di semua peringkat."
+    },
+    {
+    "kode": "ORT.10.1",
+    "klasifikasi": "Analisis Jabatan (Anjab)",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen informasi jabatan, persyaratan kerja, dan klasifikasi tugas bagi setiap jawatan di lingkungan KPU."
+    },
+    {
+    "kode": "ORT.10.2",
+    "klasifikasi": "Analisis Beban Kerja (ABK)",
+    "sifat": "Biasa",
+    "keterangan": "Perhitungan volume pekerjaan, produktiviti kakitangan, dan penetapan keperluan jumlah pegawai berdasarkan tugasan."
+    },
+    {
+    "kode": "ORT.10.3",
+    "klasifikasi": "Peta Jabatan",
+    "sifat": "Biasa",
+    "keterangan": "Visualisasi sebaran jawatan, ketersediaan posisi (existing), jawatan kosong (vacancy), dan perancangan penempatan pegawai."
+    },
+    {
+    "kode": "TU.01",
+    "klasifikasi": "Administrasi Persuratan",
+    "sifat": "Biasa",
+    "keterangan": "Pengelolaan surat menyurat, tata naskah dinas, registrasi surat masuk dan keluar secara sistematis."
+    },
+    {
+    "kode": "TU.01.1",
+    "klasifikasi": "Buku Agenda",
+    "sifat": "Biasa",
+    "keterangan": "Pencatatan kronologis surat, nomor urut naskah, log harian surat masuk, dan kendali arsip korespondensi."
+    },
+    {
+    "kode": "TU.01.2",
+    "klasifikasi": "Lembar Pengantar / Buku Ekspedisi",
+    "sifat": "Biasa",
+    "keterangan": "Bukti pengiriman dokumen, tanda terima surat, distribusi naskah antar unit kerja, dan tracking fisik naskah dinas."
+    },
+    {
+    "kode": "TU.02",
+    "klasifikasi": "Penyimpanan dan Pemeliharaan Arsip",
+    "sifat": "Penting",
+    "keterangan": "Daftar inventaris arsip, perawatan fisik dokumen, manajemen ruang simpan, depo arsip, dan perlindungan naskah dari kerusakan."
+    },
+    {
+    "kode": "TU.03",
+    "klasifikasi": "Persetujuan Jadwal Retensi Arsip (JRA)",
+    "sifat": "Penting",
+    "keterangan": "Penyusunan rancangan masa simpan dokumen, draf jadwal pemusnahan, legalitas masa aktif dan inaktif arsip berdasarkan peraturan."
+    },
+    {
+    "kode": "TU.04",
+    "klasifikasi": "Layanan Arsip",
+    "sifat": "Biasa",
+    "keterangan": "Peminjaman naskah asli, penggunaan data arsip untuk referensi, akses publik atau internal, dan prosedur pemanfaatan informasi dokumen."
+    },
+    {
+    "kode": "TU.05",
+    "klasifikasi": "Penyusutan Arsip",
+    "sifat": "Penting",
+    "keterangan": "Manajemen akhir masa simpan, pengurangan volume dokumen, dan pengelolaan daur hidup arsip (record life cycle)."
+    },
+    {
+    "kode": "TU.05.1",
+    "klasifikasi": "Pemindahan Arsip Inaktif",
+    "sifat": "Biasa",
+    "keterangan": "Transfer naskah dari unit pengolah ke unit kearsipan, pengiriman dokumen yang jarang digunakan ke gudang arsip."
+    },
+    {
+    "kode": "TU.05.2",
+    "klasifikasi": "Pemusnahan Arsip yang Tidak Bernilai Guna",
+    "sifat": "Rahasia",
+    "keterangan": "Penghancuran dokumen yang sudah melewati retensi, pembuatan berita acara pemusnahan, dan penghapusan record non-potensial."
+    },
+    {
+    "kode": "TU.05.3",
+    "klasifikasi": "Penyerahan Arsip Statis",
+    "sifat": "Penting",
+    "keterangan": "Penyerahan dokumen bernilai sejarah atau permanen ke ANRI (Arsip Nasional) atau lembaga kearsipan daerah."
+    },
+    {
+    "kode": "TU.06",
+    "klasifikasi": "Pembinaan Kearsipan",
+    "sifat": "Biasa",
+    "keterangan": "Peningkatan kapasitas pengelola arsip, edukasi tata kelola dokumen, dan penguatan sistem kearsipan internal."
+    },
+    {
+    "kode": "TU.06.1",
+    "klasifikasi": "Apresiasi / Sosialisasi / Penyuluhan Kearsipan",
+    "sifat": "Biasa",
+    "keterangan": "Kegiatan publikasi pentingnya arsip, workshop kearsipan, penyebaran informasi regulasi tata kelola dokumen."
+    },
+    {
+    "kode": "TU.06.2",
+    "klasifikasi": "Bimbingan Teknis",
+    "sifat": "Biasa",
+    "keterangan": "Pelatihan praktis pengelolaan arsip (Bimtek), tutorial penggunaan aplikasi kearsipan, dan asistensi teknis petugas arsip."
+    },
+    {
+    "kode": "TU.06.3",
+    "klasifikasi": "Supervisi dan Monitoring",
+    "sifat": "Biasa",
+    "keterangan": "Pengawasan rutin, evaluasi kinerja kearsipan unit kerja, audit kearsipan internal, dan pemantauan standar pengelolaan."
+    },
+    {
+    "kode": "RT.01",
+    "klasifikasi": "Inventarisasi Aset",
+    "sifat": "Penting",
+    "keterangan": "Manajemen barang milik negara (BMN), daftar inventaris kantor, pendataan aset tetap, dan logistik internal."
+    },
+    {
+    "kode": "RT.01.1",
+    "klasifikasi": "Administrasi Pengadaan Aset dan Persediaan",
+    "sifat": "Biasa",
+    "keterangan": "Proses belanja modal, pengadaan barang dan jasa melalui lelang atau penunjukan langsung, serta manajemen stok persediaan kantor."
+    },
+    {
+    "kode": "RT.01.2",
+    "klasifikasi": "Administrasi Pengelolaan Aset dan Persediaan",
+    "sifat": "Biasa",
+    "keterangan": "Penggunaan aplikasi SIMAK-BMN (Sistem Informasi Manajemen Akuntansi Barang Milik Negara), aplikasi SIMANTAP untuk aset tanah, serta pengelolaan barang habis pakai."
+    },
+    {
+    "kode": "RT.01.3",
+    "klasifikasi": "Administrasi Penghapusan Aset dan Persediaan",
+    "sifat": "Penting",
+    "keterangan": "Prosedur pemutihan aset melalui lelang penghapusan, pemusnahan barang rusak, hibah aset ke instansi lain, atau penjualan barang habis pakai."
+    },
+    {
+    "kode": "RT.02",
+    "klasifikasi": "Perjalanan Dinas",
+    "sifat": "Biasa",
+    "keterangan": "Administrasi penugasan luar kantor, surat perintah tugas (SPT), dan surat perjalanan dinas (SPD)."
+    },
+    {
+    "kode": "RT.02.1",
+    "klasifikasi": "Perjalanan Dinas Dalam Negeri",
+    "sifat": "Biasa",
+    "keterangan": "Kunjungan kerja antar provinsi atau kabupaten/kota di wilayah Indonesia serta biaya operasional perjalanan domestik."
+    },
+    {
+    "kode": "RT.02.2",
+    "klasifikasi": "Perjalanan Dinas Luar Negeri",
+    "sifat": "Penting",
+    "keterangan": "Kunjungan kerja internasional, delegasi luar negeri, izin keberangkatan negara, dan administrasi paspor dinas."
+    },
+    {
+    "kode": "RT.03",
+    "klasifikasi": "Pengurusan Kendaraan Dinas",
+    "sifat": "Biasa",
+    "keterangan": "Manajemen armada transportasi operasional kantor, mobil dinas, dan motor dinas."
+    },
+    {
+    "kode": "RT.03.1",
+    "klasifikasi": "Pengurusan Surat-Surat Kendaraan Dinas",
+    "sifat": "Biasa",
+    "keterangan": "Administrasi STNK, BPKB, pajak kendaraan bermotor, plat merah, dan legalitas dokumen transportasi."
+    },
+    {
+    "kode": "RT.03.2",
+    "klasifikasi": "Pemeliharaan dan Perbaikan Kendaraan",
+    "sifat": "Biasa",
+    "keterangan": "Servis rutin kendaraan, penggantian suku cadang (sparepart), perbaikan bengkel, dan perawatan mesin armada."
+    },
+    {
+    "kode": "RT.03.3",
+    "klasifikasi": "Peminjaman Kendaraan Dinas",
+    "sifat": "Biasa",
+    "keterangan": "Prosedur pemakaian mobil operasional, logistik transportasi staf, dan pencatatan penggunaan kendaraan."
+    },
+    {
+    "kode": "RT.03.4",
+    "klasifikasi": "Pengurusan Kehilangan dan Masalah Kendaraan",
+    "sifat": "Penting",
+    "keterangan": "Laporan kehilangan kendaraan, penanganan kecelakaan lalu lintas kendaraan dinas, dan urusan asuransi transportasi."
+    },
+    {
+    "kode": "RT.04",
+    "klasifikasi": "Pemeliharaan Gedung dan Taman",
+    "sifat": "Biasa",
+    "keterangan": "Perawatan fisik bangunan kantor, renovasi gedung, pembersihan taman, manajemen kebersihan lingkungan kerja (cleaning service)."
+    },
+    {
+    "kode": "RT.05",
+    "klasifikasi": "Telekomunikasi",
+    "sifat": "Biasa",
+    "keterangan": "Administrasi tagihan telepon, langganan internet/wifi kantor, jaringan radio komunikasi, faksimili/teleks, dan TV kabel."
+    },
+    {
+    "kode": "RT.06",
+    "klasifikasi": "Pengelolaan Jaringan Listrik, Air, Telepon, dan Peralatan Kantor Lainnya",
+    "sifat": "Biasa",
+    "keterangan": "Manajemen utilitas gedung, instalasi listrik, ketersediaan air bersih (PAM), dan peminjaman inventaris alat kantor."
+    },
+    {
+    "kode": "RT.07",
+    "klasifikasi": "Administrasi Penggunaan Fasilitas Kantor",
+    "sifat": "Biasa",
+    "keterangan": "Izin pemakaian ruang rapat, penggunaan gedung serbaguna, pemakaian rumah dinas (rumdin), dan fasilitas sarana prasarana lainnya."
+    },
+    {
+    "kode": "RT.08",
+    "klasifikasi": "Administrasi Penyediaan Konsumsi dan Akomodasi di Lingkungan Kantor KPU",
+    "sifat": "Biasa",
+    "keterangan": "Penyediaan snack/makan siang rapat, pemesanan hotel/penginapan tamu, dan manajemen katering kantor."
+    },
+    {
+    "kode": "RT.09",
+    "klasifikasi": "Ketertiban dan Keamanan",
+    "sifat": "Penting",
+    "keterangan": "Manajemen pengamanan aset dan personel, protokol keamanan gedung, dan koordinasi petugas keamanan (Satpam)."
+    },
+    {
+    "kode": "RT.09.1",
+    "klasifikasi": "Pengamanan, Penjagaan, dan Pengawalan",
+    "sifat": "Penting",
+    "keterangan": "Daftar piket penjagaan, pengawalan pejabat (VVIP), daftar nama Satpam, izin keluar masuk tamu, dan buku mutasi piket."
+    },
+    {
+    "kode": "RT.09.2",
+    "klasifikasi": "Laporan Ketertiban dan Keamanan",
+    "sifat": "Penting",
+    "keterangan": "Dokumentasi laporan kejadian, catatan kehilangan, laporan kerusakan fasilitas akibat gangguan, dan catatan kecelakaan di area kantor."
+    },
+    {
+    "kode": "RT.10",
+    "klasifikasi": "Administrasi Pengelolaan Parkir",
+    "sifat": "Biasa",
+    "keterangan": "Pengaturan lahan parkir kendaraan pegawai dan tamu, zonasi parkir kantor, dan ketertiban area parkir."
+    },
+    {
+    "kode": "RT.11",
+    "klasifikasi": "Administrasi Pakaian Dinas Pegawai, Satuan Pengamanan (Satpam), Petugas Kebersihan, dan Pegawai Lainnya",
+    "sifat": "Biasa",
+    "keterangan": "Pengadaan seragam dinas, atribut pakaian kerja, distribusi seragam Satpam, dan perlengkapan petugas lapangan."
+    }
+]

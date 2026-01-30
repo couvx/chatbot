@@ -1,0 +1,4 @@
+streamlit
+Sastrawi
+thefuzz
+python-Levenshtein
