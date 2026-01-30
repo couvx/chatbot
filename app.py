@@ -151,8 +151,7 @@ st.markdown(f"""
     <div class="header-container">
         <div class="header-logo">📄</div>
         <div class="header-text">
-            <h1>Klasifikasi Surat KPU</h1>
-            <p>Basis Data PKPU 1257</p>
+            <h1>Klasifikasi Surat KPU Basis Data PKPU 1257</h1>
         </div>
     </div>
 """, unsafe_allow_html=True)
