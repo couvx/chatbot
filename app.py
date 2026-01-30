@@ -163,31 +163,31 @@ def suggest_correction(query, db):
             
     return best_match if 75 < highest_ratio < 100 else None
 
-# def smart_search(query, db, stemmer):
-#     if not db: return []
-#     query_clean = query.lower().strip()
-#     query_stemmed = stemmer.stem(query_clean)
-#     scored_results = []
+def smart_search(query, db, stemmer):
+    if not db: return []
+    query_clean = query.lower().strip()
+    query_stemmed = stemmer.stem(query_clean)
+    scored_results = []
     
-#     for item in db:
-#         klasifikasi = item.get('klasifikasi', '').lower()
-#         keterangan = item.get('keterangan', '').lower()
-#         kode = item.get('kode', '').lower()
+    for item in db:
+        klasifikasi = item.get('klasifikasi', '').lower()
+        keterangan = item.get('keterangan', '').lower()
+        kode = item.get('kode', '').lower()
         
-#         score = 0
-#         if query_clean == kode: score += 100
-#         elif query_clean in kode: score += 60
+        score = 0
+        if query_clean == kode: score += 100
+        elif query_clean in kode: score += 60
         
-#         text_score = fuzz.token_set_ratio(query_clean, f"{klasifikasi} {keterangan}")
-#         stem_bonus = 15 if query_stemmed in (klasifikasi + keterangan) else 0
+        text_score = fuzz.token_set_ratio(query_clean, f"{klasifikasi} {keterangan}")
+        stem_bonus = 15 if query_stemmed in (klasifikasi + keterangan) else 0
         
-#         final_score = min(score + text_score + stem_bonus, 100)
-#         if final_score > 65:
-#             item_copy = item.copy()
-#             item_copy['score'] = final_score
-#             scored_results.append(item_copy)
+        final_score = min(score + text_score + stem_bonus, 100)
+        if final_score > 65:
+            item_copy = item.copy()
+            item_copy['score'] = final_score
+            scored_results.append(item_copy)
             
-#     return sorted(scored_results, key=lambda x: x['score'], reverse=True)
+    return sorted(scored_results, key=lambda x: x['score'], reverse=True)
 
 # --- 3. INITIALIZATION ---
 stemmer = init_nlp()
@@ -252,8 +252,8 @@ if prompt := st.chat_input("Ketik kata kunci (misal: Kepegawaian)..."):
         st.markdown(prompt)
 
     # Search in both
-    # res_kode = smart_search(prompt, db_kode, stemmer)
-    # res_jenis = smart_search(prompt, db_jenis, stemmer)
+    res_kode = smart_search(prompt, db_kode, stemmer)
+    res_jenis = smart_search(prompt, db_jenis, stemmer)
 
     with st.chat_message("assistant"):
         if res_kode or res_jenis:
