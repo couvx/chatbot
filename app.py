@@ -238,7 +238,7 @@ def render_results(results, title):
 
     st.subheader(title)
 
-    for r in results[:3]:
+    for item in results[:3]:
         score = item.get("score", 0)
         color = "green" if score > 85 else "orange"
 
