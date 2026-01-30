@@ -1,147 +1,122 @@
 import streamlit as st
 import json
-import logging
-import re
-import os
-from fuzzywuzzy import fuzz
-from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+from sastrawi.stemmer.stemmer_factory import StemmerFactory
+from thefuzz import fuzz, process
 
-# --- CONFIG & LOGGING ---
-st.set_page_config(page_title="Chatbot Naskah Dinas", layout="wide")
-logging.basicConfig(filename='chatbot.log', level=logging.INFO, format='%(asctime)s: %(message)s')
+# --- CONFIG ---
+st.set_page_config(page_title="DinasChat AI", page_icon="📝")
 
-# --- ENGINE & DATA LOADING ---
+# --- LOAD DATA & NLP TOOLS ---
 @st.cache_resource
-def get_stemmer():
-    return StemmerFactory().create_stemmer()
+def get_nlp_tools():
+    factory = StemmerFactory()
+    return factory.create_stemmer()
 
-def load_data(file_path):
-    if os.path.exists(file_path):
-        with open(file_path, 'r') as f:
-            return json.load(f)
-    return []
+@st.cache_data
+def load_all_db():
+    with open('db_kode.json', 'r') as f: k = json.load(f)
+    with open('db_jenis.json', 'r') as f: j = json.load(f)
+    return k, j
 
-stemmer = get_stemmer()
+stemmer = get_nlp_tools()
+db_kode, db_jenis = load_all_db()
 
-# --- HELPER FUNCTIONS ---
-def synonym_mapping(text):
-    synonyms = {
-        "mobil": "kendaraan", "sprint": "perintah", 
-        "memo": "nota", "bengkel": "pemeliharaan",
-        "hilang": "kehilangan", "asuransi": "masalah"
-    }
-    for word, replacement in synonyms.items():
-        text = text.replace(word, replacement)
-    return text
-
-def validate_direct_code(text):
-    # Validasi format kode seperti RT.03.2 atau SPt
-    return bool(re.match(r'^[A-Za-z0-9.]+$', text))
-
-def search_engine(query, db):
+# --- SEARCH ENGINE & FUZZY LOGIC ---
+def search_engine(query, database):
+    query = query.lower()
+    
+    # 1. Direct Code Search (Exact)
+    direct = [i for i in database if i['kode'].lower() == query]
+    if direct: return direct
+    
+    # 2. Fuzzy Matching & Keyword Search
+    # Mencari kemiripan pada field 'kode', 'klasifikasi', dan 'keterangan'
     results = []
-    query_clean = stemmer.stem(query.lower())
-    query_clean = synonym_mapping(query_clean)
-    
-    for item in db:
-        # 1. Direct Code Search (Skor 100)
-        if query.lower() == item['kode'].lower():
-            results.append((item, 105)) # Bonus score untuk exact match
+    for item in database:
+        # Gabungkan field untuk pencarian teks
+        target_text = f"{item['kode']} {item['klasifikasi']} {item['keterangan']}".lower()
+        
+        # Cek Keyword Match
+        if query in target_text:
+            results.append(item)
             continue
-        
-        # 2. Fuzzy Matching pada Klasifikasi & Keterangan
-        score_klasifikasi = fuzz.token_set_ratio(query_clean, item['klasifikasi'].lower())
-        score_ket = fuzz.partial_ratio(query_clean, item['keterangan'].lower())
-        final_score = max(score_klasifikasi, score_ket)
-        
-        if final_score > 65: # Threshold
-            results.append((item, final_score))
             
-    return sorted(results, key=lambda x: x[1], reverse=True)
+        # Cek Fuzzy Match Score
+        score = fuzz.partial_ratio(query, target_text)
+        if score > 80: # Ambang batas kecocokan
+            results.append(item)
+            
+    return results
 
-# --- SIDEBAR: AUTO-UPDATE & LOGS ---
+# --- UI LAYOUT ---
+st.title("🤖 Chatbot Naskah Dinas")
+st.markdown("---")
+
+# State Management for Intent & History
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+if "intent_context" not in st.session_state:
+    st.session_state.intent_context = None
+
+# Sidebar untuk Log & Status
 with st.sidebar:
-    st.title("⚙️ Admin Panel")
-    st.subheader("Update Database")
-    target_db = st.selectbox("Pilih Database", ["db_kode", "db_jenis"])
-    uploaded_file = st.file_uploader("Upload JSON Baru", type=['json'])
-    
-    if uploaded_file and st.button("Update Data"):
-        new_data = json.load(uploaded_file)
-        with open(f"{target_db}.json", 'w') as f:
-            json.dump(new_data, f, indent=4)
-        st.success("Database diperbarui!")
+    st.header("⚙️ Sistem Status")
+    st.write(f"**Konteks Aktif:** {st.session_state.intent_context if st.session_state.intent_context else 'Netral'}")
+    if st.button("🗑️ Clear Chat"):
+        st.session_state.messages = []
+        st.session_state.intent_context = None
         st.rerun()
 
-    if st.checkbox("Lihat Log Pertanyaan"):
-        if os.path.exists('chatbot.log'):
-            with open('chatbot.log', 'r') as f:
-                st.text(f.read()[-500:]) # Tampilkan 500 karakter terakhir
-
-# --- MAIN CHAT INTERFACE ---
-st.title("📝 Chatbot Naskah Dinas")
-st.info("Gunakan kata kunci seperti 'kode kendaraan', 'jenis surat', atau langsung masukkan kode (misal: RT.03.2)")
-
-# Database Loading
-db_kode = load_data('db_kode.json')
-db_jenis = load_data('db_jenis.json')
-
-# State Management
-if "messages" not in st.session_state: st.session_state.messages = []
-if "last_intent" not in st.session_state: st.session_state.last_intent = "KODE"
-
-# Display Messages
+# Display Chat History
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
 
-# User Input
-if prompt := st.chat_input("Ketik pertanyaan Anda..."):
+# --- CORE CHAT LOGIC ---
+if prompt := st.chat_input("Tanyakan kode (ex: PP.01) atau jenis (ex: Laporan)..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"): st.markdown(prompt)
+    with st.chat_message("user"):
+        st.markdown(prompt)
 
-    # 1. Routing Intent
-    p_lower = prompt.lower()
-    if any(k in p_lower for k in ['surat', 'jenis', 'naskah', 'nd', 'st', 'spt']):
-        intent = "JENIS"
-    elif any(k in p_lower for k in ['kode', 'nomor', 'klasifikasi', 'rt.']):
-        intent = "KODE"
+    # 1. Preprocessing (Lemmatization)
+    clean_query = stemmer.stem(prompt.lower())
+
+    # 2. Intent Detection (State Management)
+    # Jika user tanya tentang kode/klasifikasi
+    if any(x in clean_query for x in ["kode", "klasifikasi", "nomor", "angka"]):
+        st.session_state.intent_context = "KODE"
+    # Jika user tanya tentang jenis/surat/naskah
+    elif any(x in clean_query for x in ["jenis", "surat", "naskah", "arti", "maksud"]):
+        st.session_state.intent_context = "JENIS"
+
+    # 3. Decision Making Berdasarkan Intent
+    final_results = []
+    header_text = ""
+
+    if st.session_state.intent_context == "KODE":
+        final_results = search_engine(prompt, db_kode)
+        header_text = "🔍 **Hasil Klasifikasi Kode**"
+    elif st.session_state.intent_context == "JENIS":
+        final_results = search_engine(prompt, db_jenis)
+        header_text = "📄 **Detail Jenis Naskah**"
     else:
-        intent = st.session_state.last_intent
-    
-    st.session_state.last_intent = intent
-    current_db = db_kode if intent == "KODE" else db_jenis
-    
-    # 2. Search & Drill Down
-    matches = search_engine(prompt, current_db)
-    
+        # Jika intent belum terdeteksi, coba cari di keduanya
+        res_k = search_engine(prompt, db_kode)
+        res_j = search_engine(prompt, db_jenis)
+        final_results = res_k + res_j
+        header_text = "🔎 **Hasil Pencarian Umum**"
+
+    # 4. Generate Response
     with st.chat_message("assistant"):
-        if not matches:
-            response = "Maaf, informasi tidak ditemukan di database. Coba kata kunci lain."
-            st.error(response)
-            logging.info(f"FAILED: {prompt} | Intent: {intent}")
+        if final_results:
+            st.markdown(header_text)
+            for res in final_results[:3]: # Limit 3 hasil teratas
+                with st.expander(f"{res['kode']} - {res['klasifikasi']}", expanded=True):
+                    st.write(f"**Sifat:** {res['sifat']}")
+                    st.write(f"**Keterangan:** {res['keterangan']}")
+            response_msg = f"Menampilkan {len(final_results)} hasil untuk '{prompt}'"
         else:
-            logging.info(f"SUCCESS: {prompt} | Found: {len(matches)}")
-            
-            # Ambil skor tertinggi
-            best_match, score = matches[0]
-            
-            # Logic Drill Down jika ada beberapa kemiripan
-            if len(matches) > 1 and score < 100:
-                response = f"Saya menemukan beberapa hasil untuk '{prompt}'. Apakah yang Anda maksud salah satu dari ini?"
-                st.markdown(response)
-                for item, s in matches[:3]: # Tampilkan 3 teratas
-                    if st.button(f"📄 {item['kode']} - {item['klasifikasi']}"):
-                        # Tampilkan detail saat diklik (Drill Down)
-                        st.write(f"**Detail:** {item['keterangan']}")
-            else:
-                response = f"""
-                **Ditemukan pada Database {intent}:**
-                - **Kode:** `{best_match['kode']}`
-                - **Klasifikasi:** {best_match['klasifikasi']}
-                - **Sifat:** {best_match['sifat']}
-                - **Keterangan:** {best_match['keterangan']}
-                """
-                st.markdown(response)
-        
-    st.session_state.messages.append({"role": "assistant", "content": response})
+            response_msg = "Maaf, data tidak ditemukan. Mohon gunakan kata kunci lain."
+            st.warning(response_msg)
+
+    st.session_state.messages.append({"role": "assistant", "content": response_msg})
