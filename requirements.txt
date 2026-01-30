@@ -1,4 +1,4 @@
 streamlit
-Sastrawi
+sastrawi
 thefuzz
 python-Levenshtein
