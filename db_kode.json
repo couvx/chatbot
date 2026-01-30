@@ -1560,6 +1560,12 @@
     "keterangan": "Naskah dinas terkait kegiatan pembinaan mental dan rohani pegawai."
   },
   {
+    "kode": "SDM.04",
+    "klasifikasi": "Kode Etik, Disiplin, Pemberhentian, dan Pensiun ASN",
+    "sifat": "Penting",
+    "keterangan": "Meliputi naskah terkait: penegakan disiplin dan daftar hadir pegawai; proses hukuman disiplin kategori ringan, sedang, hingga berat; pemberhentian pegawai tanpa hak pensiun; penyelesaian pengaduan, keberatan, serta sengketa kepegawaian; usul pemberhentian dan penetapan pensiun bagi pegawai, janda/duda, maupun ASN yang tewas."
+  },
+  {
     "kode": "SDM.04.1",
     "klasifikasi": "Disiplin Pegawai",
     "sifat": "Penting",
