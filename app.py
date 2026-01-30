@@ -4,8 +4,126 @@ import os
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from thefuzz import fuzz
 
-# --- 1. KONFIGURASI HALAMAN ---
-st.set_page_config(page_title="DinasChat Pro", page_icon="🤖", layout="centered")
+# --- 1. KONFIGURASI HALAMAN & TEMA ---
+st.set_page_config(page_title="Klasifikasi Surat KPU", page_icon="📑", layout="centered")
+
+# Custom CSS untuk replikasi UI Landing Page sesuai Gambar
+st.markdown("""
+    <style>
+    /* Paksa Tema Terang */
+    .stApp { background-color: white; color: #1e293b; }
+    
+    /* Area Header Atas */
+    .header-container {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px solid #f1f5f9;
+        margin-bottom: 50px;
+    }
+    .header-logo {
+        background-color: #e11d48;
+        color: white;
+        padding: 8px;
+        border-radius: 8px;
+        font-weight: bold;
+    }
+    .header-text h1 {
+        font-size: 1.1rem !important;
+        margin: 0 !important;
+        color: #0f172a;
+    }
+    .header-text p {
+        font-size: 0.75rem;
+        margin: 0;
+        color: #64748b;
+    }
+
+    /* Area Tengah (Landing) */
+    .landing-container {
+        text-align: center;
+        margin-top: 100px;
+        margin-bottom: 50px;
+    }
+    .landing-icon {
+        background-color: #fff1f2;
+        color: #e11d48;
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+        border-radius: 50%;
+        font-size: 40px;
+        margin: 0 auto 24px auto;
+    }
+    .landing-container h2 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 16px;
+    }
+    .landing-container p {
+        color: #64748b;
+        max-width: 500px;
+        margin: 0 auto;
+        line-height: 1.6;
+    }
+            
+    /* --- BUBBLE USER (KANAN) --- */
+    /* Mengatur kontainer agar pesan merapat ke kanan */
+    [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
+        flex-direction: row-reverse;
+        background-color: transparent !important;
+        transition: all 0.3s;
+    }
+
+    /* Mengatur bubble agar lebarnya menyesuaikan teks (fit-content) */
+    [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] {
+        background-color: #2C2C2E !important; /* Warna Merah */
+        color: white !important; /* Warna Kuning */
+        border-radius: 20px 5px 20px 20px !important;
+        padding: 10px 16px !important;
+        width: fit-content !important; /* Kunci agar bubble menyesuaikan teks */
+        margin-left: auto; /* Memaksa bubble ke kanan */
+    }
+
+    /* --- STYLE BUBBLE ASSISTANT (KIRI) --- */
+    [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
+        background-color: transparent !important;
+    }
+
+    [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) .st-emotion-cache-10t9u47,
+    [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) [data-testid="stChatMessageContent"] {
+        background-color: #f1f5f9 !important; /* Abu-abu sangat muda */
+        color: #1e293b !important; /* Teks Gelap */
+        border-radius: 5px 20px 20px 20px !important;
+        padding: 12px 18px !important;
+        border: 1px solid #e2e8f0;
+    }
+
+    [data-testid="stChatMessageAvatarAssistant"] {
+        background-color: #64748b !important; /* Warna avatar asisten */
+    }
+
+    /* Perbaikan Jarak */
+    [data-testid="stChatMessage"] {
+        gap: 10px;
+        padding: 1rem 0 !important;
+    }
+
+    /* Footer di bawah Input */
+    .input-footer {
+        font-size: 0.7rem;
+        color: #94a3b8;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    /* Sidebar Styling (Tetap seperti instruksi sebelumnya) */
+    [data-testid="stSidebar"] { background-color: #f8f9fa; border-right: 1px solid #e0e0e0; }
+    .sidebar-label { font-size: 0.75rem; font-weight: 800; color: #94a3b8; letter-spacing: 0.1rem; margin-bottom: 10px; }
+    </style>
+""", unsafe_allow_html=True)
 
 # --- 2. CORE FUNCTIONS ---
 
@@ -89,8 +207,35 @@ def render_results(results, title):
                 st.info(f"**Keterangan:** {r.get('keterangan', '-')}")
         st.divider()
 
+# --- 4. SIDEBAR (SESUAI INSTRUKSI SEBELUMNYA) ---
+with st.sidebar:
+    st.markdown('<div class="sidebar-label">PERCAKAPAN</div>', unsafe_allow_html=True)
+    st.button("💬 Chat Aktif", use_container_width=True, type="secondary")
+    
+    st.markdown("<div style='height: 65vh'></div>", unsafe_allow_html=True)
+    st.divider()
+    
+    if st.session_state.messages:
+        chat_data = pd.DataFrame(st.session_state.messages)
+        csv = chat_data.to_csv(index=False).encode('utf-8')
+        st.download_button(label="📥 Download Log Chat", data=csv, file_name=f"log_chat.csv", mime='text/csv', use_container_width=True)
+
+    if st.button("🗑️ Hapus Riwayat Chat", use_container_width=True, type="primary"):
+        st.session_state.messages = []
+        st.rerun()
+
 # --- 5. INTERFACE CHAT ---
-st.title("🤖 DinasChat Pro")
+# st.title("🤖 DinasChat Pro")
+
+# Header Atas (Logo dan Judul Kecil)
+st.markdown(f"""
+    <div class="header-container">
+        <div class="header-logo">📄</div>
+        <div class="header-text">
+            <h1>Klasifikasi Surat KPU Basis Data PKPU 1257</h1>
+        </div>
+    </div>
+""", unsafe_allow_html=True)
 
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
