@@ -81,7 +81,7 @@ st.markdown("""
 
     /* Mengatur bubble agar lebarnya menyesuaikan teks (fit-content) */
     [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] {
-        background-color: #e11d48 !important; /* Warna Merah */
+        background-color: #2C2C2E !important; /* Warna Merah */
         color: white !important; /* Warna Kuning */
         border-radius: 20px 5px 20px 20px !important;
         padding: 10px 16px !important;
