@@ -71,36 +71,22 @@ st.markdown("""
         line-height: 1.6;
     }
             
-    /* --- BUBBLE USER (KANAN) --- REVISED */
+    /* --- BUBBLE USER (KANAN) --- */
+    /* Mengatur kontainer agar pesan merapat ke kanan */
     [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
-        flex-direction: row-reverse !important;
+        flex-direction: row-reverse;
         background-color: transparent !important;
-        display: flex !important;
+        transition: all 0.3s;
     }
 
-    /* Target utama untuk mengecilkan bubble */
+    /* Mengatur bubble agar lebarnya menyesuaikan teks (fit-content) */
     [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] {
-        background-color: #2C2C2E !important; /* Warna Merah Kembali */
+        background-color: #2C2C2E !important; /* Warna Merah */
         color: white !important; /* Warna Kuning */
         border-radius: 20px 5px 20px 20px !important;
         padding: 10px 16px !important;
-        
-        /* Ini adalah bagian kunci agar mengecil sesuai teks */
-        width: fit-content !important; 
-        min-width: unset !important;
-        max-width: 80% !important;
-        display: block !important;
-        margin-left: auto !important; 
-    }
-
-    /* Memastikan teks di dalamnya tidak memaksa lebar penuh */
-    [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] p {
-        width: fit-content !important;
-        margin: 0 !important;
-    }
-
-    [data-testid="stChatMessageAvatarUser"] {
-        background-color: #e11d48 !important;
+        width: fit-content !important; /* Kunci agar bubble menyesuaikan teks */
+        margin-left: auto; /* Memaksa bubble ke kanan */
     }
 
     /* --- STYLE BUBBLE ASSISTANT (KIRI) --- */
