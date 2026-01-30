@@ -9,21 +9,58 @@ from datetime import datetime
 # --- 1. KONFIGURASI HALAMAN ---
 st.set_page_config(page_title="Klasifikasi Surat KPU", page_icon="📄", layout="wide")
 
-# Custom CSS untuk menyamakan style dengan gambar
+# Custom CSS untuk UI sesuai gambar
 st.markdown("""
     <style>
-    .main { background-color: #f8f9fa; }
-    .stChatMessage { border-radius: 15px; margin-bottom: 10px; }
+    /* Background Utama */
+    .stApp { background-color: #f0f2f5; }
+    
+    /* Sidebar Styling */
+    [data-testid="stSidebar"] { background-color: white; border-right: 1px solid #e0e0e0; }
+    
+    /* Chat Bubble User (Merah) */
+    .user-bubble {
+        background-color: #d32f2f;
+        color: white;
+        padding: 12px 18px;
+        border-radius: 20px 20px 0px 20px;
+        display: inline-block;
+        max-width: 80%;
+        float: right;
+        margin: 5px 0;
+    }
+    
+    /* Chat Bubble Assistant (Putih/Abu sangat muda) */
+    .assistant-bubble {
+        background-color: white;
+        color: #333;
+        padding: 15px 20px;
+        border-radius: 0px 20px 20px 20px;
+        display: inline-block;
+        max-width: 90%;
+        border: 1px solid #e0e0e0;
+        margin: 5px 0;
+        line-height: 1.6;
+    }
+
+    /* Avatar Container */
+    .chat-row { display: flex; margin-bottom: 20px; width: 100%; }
+    .row-reverse { flex-direction: row-reverse; }
+    .avatar { width: 35px; height: 35px; border-radius: 50%; margin: 0 10px; }
+    
+    /* Welcome Screen */
     .welcome-container {
         display: flex; flex-direction: column; align-items: center;
-        justify-content: center; text-align: center; padding: 100px 20px;
+        justify-content: center; text-align: center; padding: 60px 20px;
     }
-    .welcome-icon { font-size: 50px; color: #d32f2f; margin-bottom: 20px; }
+    .welcome-icon { 
+        background-color: #fff1f1; padding: 20px; border-radius: 20px;
+        font-size: 40px; color: #d32f2f; margin-bottom: 20px; 
+    }
     </style>
     """, unsafe_allow_html=True)
 
 # --- 2. CORE FUNCTIONS ---
-
 @st.cache_resource
 def init_nlp():
     return StemmerFactory().create_stemmer()
@@ -39,7 +76,7 @@ def load_db():
             with open('db_jenis.json', 'r', encoding='utf-8') as f:
                 jenis_data = json.load(f)
         return kode_data, jenis_data
-    except Exception as e:
+    except Exception:
         return [], []
 
 def smart_search(query, db, stemmer):
@@ -51,113 +88,109 @@ def smart_search(query, db, stemmer):
     for item in db:
         content = f"{item.get('klasifikasi', '')} {item.get('keterangan', '')}".lower()
         kode = item.get('kode', '').lower()
-        
         score = 0
         if query_clean == kode: score += 100
         elif query_clean in kode: score += 60
-        
         text_score = fuzz.token_set_ratio(query_clean, content)
         stem_bonus = 15 if query_stemmed in content else 0
-        
         final_score = min(score + text_score + stem_bonus, 100)
-        if final_score >= 75: # Sesuai permintaan: Tetap tampilkan 75%-100%
+        
+        if final_score >= 75: # Tetap pada filter 75-100%
             item_copy = item.copy()
             item_copy['score'] = final_score
             scored_results.append(item_copy)
-            
     return sorted(scored_results, key=lambda x: x['score'], reverse=True)
 
-# --- 3. INITIALIZATION & SESSION STATE ---
+# --- 3. INITIALIZATION ---
 stemmer = init_nlp()
 db_kode, db_jenis = load_db()
-
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
 # --- 4. SIDEBAR ---
 with st.sidebar:
-    st.title("🏠 Menu Utama")
+    st.markdown("### 🏠 Menu Utama")
     st.write("---")
-    st.write("PERCAKAPAN")
-    st.button("💬 Chat Aktif", use_container_width=True, type="primary")
+    st.caption("PERCAKAPAN")
+    st.button("💬 Chat Aktif", use_container_width=True)
     
-    st.spacer = st.container()
-    st.write("---")
+    st.write("") # Spacer
     
-    # Fitur Download Log Chat
     if st.session_state.messages:
         chat_data = [{"Waktu": datetime.now().strftime("%H:%M"), "Role": m["role"], "Pesan": m["content"]} for m in st.session_state.messages]
         df_log = pd.DataFrame(chat_data)
         csv = df_log.to_csv(index=False).encode('utf-8')
-        st.download_button(label="📥 Download Log Chat", data=csv, file_name=f"log_chat_{datetime.now().strftime('%Y%m%d_%H%M')}.csv", mime="text/csv", use_container_width=True)
+        st.download_button("📥 Download Log Chat", data=csv, file_name="log_chat_kpu.csv", use_container_width=True)
     
-    if st.button("🗑️ Hapus Riwayat Chat", use_container_width=True):
+    if st.button("🗑️ Hapus Riwayat Chat", use_container_width=True, type="secondary"):
         st.session_state.messages = []
         st.rerun()
     
-    st.caption("Versi 1.1.0 - PKPU 1257")
+    st.markdown("<br><br><center><p style='font-size:10px; color:gray;'>Versi 1.1.0 - PKPU 1257</p></center>", unsafe_allow_html=True)
 
-# --- 5. MAIN UI ---
-# Header tetap muncul
-col1, col2 = st.columns([0.1, 0.9])
-with col1:
-    st.image("https://upload.wikimedia.org/wikipedia/commons/4/46/KPU_Logo.svg", width=50) # Opsional: Logo KPU
-with col2:
+# --- 5. MAIN HEADER ---
+col_logo, col_text = st.columns([0.07, 0.93])
+with col_logo:
+    st.image("https://upload.wikimedia.org/wikipedia/commons/4/46/KPU_Logo.svg", width=45)
+with col_text:
     st.markdown("### **Klasifikasi Surat KPU**")
     st.caption("Basis Data PKPU 1257")
 
-# Kondisi Tampilan: Landing Page vs Chat History
+# --- 6. CHAT DISPLAY ---
 if not st.session_state.messages:
     st.markdown(f"""
         <div class="welcome-container">
             <div class="welcome-icon">📄</div>
-            <h2>Klasifikasi Arsip KPU</h2>
-            <p>Tanyakan <b>**Kode Klasifikasi**</b> dan <b>**Sifat Naskah**</b><br>
+            <h2 style='color: #1a237e;'>Klasifikasi Arsip KPU</h2>
+            <p style='color: #666;'>Tanyakan <b>**Kode Klasifikasi**</b> dan <b>**Sifat Naskah**</b><br>
             (Biasa/Rahasia) berdasarkan PKPU 1257. Silakan ketik<br>
             perihal surat Anda di bawah ini.</p>
         </div>
         """, unsafe_allow_html=True)
 else:
-    def render_results(results, title):
-        if results:
-            st.subheader(title)
-            for r in results[:3]:
-                s = r.get('score', 0)
-                clr = "green" if s > 85 else "orange"
-                with st.expander(f"📍 {r.get('kode', 'N/A')} - {r.get('klasifikasi', 'Detail')}"):
-                    st.markdown(f":{clr}[**Relevansi: {s}%**]")
-                    st.write(f"**Sifat:** {r.get('sifat', '-')}")
-                    st.info(f"**Keterangan:** {r.get('keterangan', '-')}")
-            st.divider()
-
     for msg in st.session_state.messages:
-        with st.chat_message(msg["role"]):
-            st.markdown(msg["content"])
-            if "res_kode" in msg: render_results(msg["res_kode"], "🗂️ Hasil Kode Klasifikasi")
-            if "res_jenis" in msg: render_results(msg["res_jenis"], "📄 Hasil Jenis Naskah")
+        if msg["role"] == "user":
+            st.markdown(f"""
+                <div class="chat-row row-reverse">
+                    <img src="https://cdn-icons-png.flaticon.com/512/1144/1144760.png" class="avatar">
+                    <div class="user-bubble">{msg['content']}</div>
+                </div>
+                """, unsafe_allow_html=True)
+        else:
+            st.markdown(f"""
+                <div class="chat-row">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2593/2593635.png" class="avatar">
+                    <div class="assistant-bubble">
+                        {msg['content']}
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
+            
+            # Tampilkan Expander di bawah bubble asisten jika ada hasil
+            if "res_kode" in msg:
+                for r in msg["res_kode"][:3]:
+                    with st.expander(f"📍 {r.get('kode')} - {r.get('klasifikasi')}"):
+                        st.write(f"**Sifat:** {r.get('sifat')}")
+                        st.info(f"**Keterangan:** {r.get('keterangan')}")
 
-# --- 6. CHAT INPUT ---
+# --- 7. CHAT INPUT ---
 if prompt := st.chat_input("Contoh: Kode dan sifat surat pelantikan KPPS..."):
-    # Simpan pesan user
     st.session_state.messages.append({"role": "user", "content": prompt})
     
-    # Cari data
     res_kode = smart_search(prompt, db_kode, stemmer)
     res_jenis = smart_search(prompt, db_jenis, stemmer)
     
-    # Logika Assistant
     if res_kode or res_jenis:
-        response_text = "Berikut adalah hasil temuan saya (Akurasi 75-100%):"
+        ans = "Tentu, berikut adalah hasil temuan saya berdasarkan **PKPU Nomor 1257**:"
         st.session_state.messages.append({
-            "role": "assistant", 
-            "content": response_text,
-            "res_kode": res_kode,
-            "res_jenis": res_jenis
+            "role": "assistant", "content": ans,
+            "res_kode": res_kode, "res_jenis": res_jenis
         })
     else:
-        error_msg = f"Maaf, tidak ditemukan data yang cocok (min. 75%) untuk **'{prompt}'**."
-        st.session_state.messages.append({"role": "assistant", "content": error_msg})
-    
+        st.session_state.messages.append({
+            "role": "assistant", 
+            "content": f"Maaf, saya tidak menemukan data dengan tingkat kecocokan di atas 75% untuk **'{prompt}'**."
+        })
     st.rerun()
 
-st.markdown("<center><p style='color: gray; font-size: 10px;'>Hasil berdasarkan AI. Selalu verifikasi dengan dokumen fisik PKPU 1257.</p></center>", unsafe_allow_html=True)
+st.markdown("<br><center><p style='color: gray; font-size: 10px;'>Hasil berdasarkan AI. Selalu verifikasi dengan dokumen fisik PKPU 1257.</p></center>", unsafe_allow_html=True)
