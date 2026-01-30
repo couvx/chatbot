@@ -6,55 +6,45 @@ from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from thefuzz import fuzz
 from datetime import datetime
 
-# --- 1. KONFIGURASI HALAMAN & TEMA ---
+# --- 1. KONFIGURASI HALAMAN & TEMA TERANG ---
 st.set_page_config(page_title="DinasChat Pro", page_icon="🤖", layout="centered")
 
-# Custom CSS untuk replikasi UI sesuai gambar
+# Custom CSS untuk memaksa Tema Terang dan mengatur Sidebar
 st.markdown("""
     <style>
-    /* Mengatur warna Sidebar */
+    /* Memaksa background putih pada seluruh aplikasi */
+    .stApp {
+        background-color: white;
+        color: black;
+    }
+    
+    /* Mengatur warna Sidebar tetap terang */
     [data-testid="stSidebar"] {
         background-color: #f8f9fa;
         border-right: 1px solid #e0e0e0;
     }
-    
-    /* Header Menu Utama */
-    .menu-header {
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: #1e3a8a;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 20px;
-    }
-    
-    /* Label Kategori (PERCAKAPAN) */
+
+    /* Label PERCAKAPAN */
     .sidebar-label {
         font-size: 0.75rem;
         font-weight: 800;
         color: #94a3b8;
         letter-spacing: 0.1rem;
         margin-bottom: 10px;
-        margin-top: 20px;
+        margin-top: 10px;
     }
 
-    /* Styling Tombol Chat Aktif (Pink/Red Light) */
+    /* Styling tombol agar lebih rapi */
     .stButton > button {
         border-radius: 8px;
+        text-align: left;
     }
     
-    /* Versi Footer */
-    .footer-text {
-        font-size: 0.75rem;
-        color: #94a3b8;
-        text-align: center;
-        margin-top: 20px;
-    }
-    
-    /* Chat Input Styling */
-    .stChatInput {
-        border-radius: 10px;
+    /* Container untuk menaruh tombol di bagian bawah sidebar */
+    .sidebar-footer {
+        position: fixed;
+        bottom: 20px;
+        width: 260px;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -79,20 +69,6 @@ def load_db():
     except Exception as e:
         st.error(f"Gagal memuat database: {e}")
         return [], []
-
-def suggest_correction(query, db):
-    words_pool = set()
-    for item in db:
-        content = f"{item.get('klasifikasi', '')} {item.get('keterangan', '')}".lower()
-        words_pool.update("".join([c for c in content if c.isalnum() or c.isspace()]).split())
-    
-    best_match, highest_ratio = None, 0
-    for word in words_pool:
-        if len(word) < 4: continue
-        ratio = fuzz.ratio(query.lower(), word)
-        if ratio > highest_ratio:
-            highest_ratio, best_match = ratio, word
-    return best_match if 75 < highest_ratio < 100 else None
 
 def smart_search(query, db, stemmer):
     if not db: return []
@@ -126,25 +102,20 @@ db_kode, db_jenis = load_db()
 if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "assistant", "content": "Halo! Silakan tanya tentang **Kode Klasifikasi** atau **Jenis Surat**."}]
 
-# --- 4. SIDEBAR (UI SESUAI GAMBAR) ---
+# --- 4. SIDEBAR MODIFIKASI ---
 with st.sidebar:
-    # Header dengan Icon Gear Merah
-    st.markdown('<div class="menu-header"><span style="color:#e11d48">⚙️</span> Menu Utama</div>', unsafe_allow_html=True)
-    st.divider()
-    
-    # Kategori Percakapan
+    # 1. Chat Aktif di Bagian Atas
     st.markdown('<div class="sidebar-label">PERCAKAPAN</div>', unsafe_allow_html=True)
-    
-    # Tombol Chat Aktif dengan styling khusus
     st.button("💬 Chat Aktif", use_container_width=True, type="secondary")
     
-    # Spacer
-    st.markdown("<div style='height: 300px'></div>", unsafe_allow_html=True)
+    # Elemen kosong untuk mendorong tombol lain ke bawah
+    # (Menggunakan CSS position fixed untuk kestabilan posisi bawah)
+    st.markdown('<div style="height: 60vh;"></div>', unsafe_allow_html=True)
     
-    # Action Buttons
+    # 2. Container Bawah untuk Download dan Hapus
     st.divider()
     
-    # Download Log
+    # Tombol Download Log
     if st.session_state.messages:
         chat_data = pd.DataFrame(st.session_state.messages)
         csv = chat_data.to_csv(index=False).encode('utf-8')
@@ -156,13 +127,10 @@ with st.sidebar:
             use_container_width=True
         )
 
-    # Hapus Riwayat (Aksen Merah)
+    # Tombol Hapus Riwayat (Aksen Merah/Primary)
     if st.button("🗑️ Hapus Riwayat Chat", use_container_width=True, type="primary"):
         st.session_state.messages = [{"role": "assistant", "content": "Riwayat telah dibersihkan."}]
         st.rerun()
-    
-    # Footer Versi
-    st.markdown('<div class="footer-text">Versi 1.1.0 - PKPU 1257</div>', unsafe_allow_html=True)
 
 # --- 5. UI RENDERER ---
 def render_results(results, title):
@@ -208,14 +176,7 @@ if prompt := st.chat_input("Ketik kata kunci (misal: Kepegawaian)..."):
                 "res_jenis": res_jenis
             })
         else:
-            suggestion = suggest_correction(prompt, db_kode + db_jenis)
             error_msg = f"Maaf, tidak ditemukan data untuk **'{prompt}'**."
             st.error(error_msg)
-            
-            if suggestion:
-                st.markdown(f"💡 Mungkin maksud Anda adalah:")
-                if st.button(f"🔍 Cari: {suggestion}", key="btn_suggest"):
-                    st.session_state.messages.append({"role": "user", "content": suggestion})
-                    st.rerun()
             st.session_state.messages.append({"role": "assistant", "content": error_msg})
     st.rerun()
