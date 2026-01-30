@@ -70,6 +70,49 @@ st.markdown("""
         margin: 0 auto;
         line-height: 1.6;
     }
+            
+    /* --- STYLE BUBBLE USER (KANAN) --- */
+    [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) {
+        flex-direction: row-reverse;
+        text-align: right;
+        background-color: transparent !important;
+    }
+
+    [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) .st-emotion-cache-10t9u47, 
+    [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarUser"]) [data-testid="stChatMessageContent"] {
+        background-color: #e11d48 !important; /* Merah */
+        color: #ffeb3b !important; /* Kuning sesuai gambar */
+        border-radius: 20px 5px 20px 20px !important;
+        padding: 12px 18px !important;
+    }
+
+    [data-testid="stChatMessageAvatarUser"] {
+        background-color: #e11d48 !important;
+    }
+
+    /* --- STYLE BUBBLE ASSISTANT (KIRI) --- */
+    [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) {
+        background-color: transparent !important;
+    }
+
+    [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) .st-emotion-cache-10t9u47,
+    [data-testid="stChatMessage"]:has([data-testid="stChatMessageAvatarAssistant"]) [data-testid="stChatMessageContent"] {
+        background-color: #f1f5f9 !important; /* Abu-abu sangat muda */
+        color: #1e293b !important; /* Teks Gelap */
+        border-radius: 5px 20px 20px 20px !important;
+        padding: 12px 18px !important;
+        border: 1px solid #e2e8f0;
+    }
+
+    [data-testid="stChatMessageAvatarAssistant"] {
+        background-color: #64748b !important; /* Warna avatar asisten */
+    }
+
+    /* Perbaikan Jarak */
+    [data-testid="stChatMessage"] {
+        gap: 10px;
+        padding: 1rem 0 !important;
+    }
 
     /* Footer di bawah Input */
     .input-footer {
