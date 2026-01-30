@@ -252,8 +252,8 @@ if prompt := st.chat_input("Ketik kata kunci (misal: Kepegawaian)..."):
         st.markdown(prompt)
 
     # Search in both
-    res_kode = smart_search(prompt, db_kode, stemmer)
-    res_jenis = smart_search(prompt, db_jenis, stemmer)
+    # res_kode = smart_search(prompt, db_kode, stemmer)
+    # res_jenis = smart_search(prompt, db_jenis, stemmer)
 
     with st.chat_message("assistant"):
         if res_kode or res_jenis:
