@@ -928,5 +928,857 @@
     "klasifikasi": "Administrasi Pakaian Dinas Pegawai, Satuan Pengamanan (Satpam), Petugas Kebersihan, dan Pegawai Lainnya",
     "sifat": "Biasa",
     "keterangan": "Pengadaan seragam dinas, atribut pakaian kerja, distribusi seragam Satpam, dan perlengkapan petugas lapangan."
-    }
+    },
+    {
+    "kode": "PK.01",
+    "klasifikasi": "Persidangan",
+    "sifat": "Penting",
+    "keterangan": "Meliputi Naskah Dinas berupa Undangan Rapat Pleno, Risalah Rapat, Berita Acara Rapat Pleno, Transkrip Rekaman Rapat, dan Rekaman Hasil Rapat (Audio)."
+    },
+    {
+        "kode": "PK.02",
+        "klasifikasi": "Keprotokolan",
+        "sifat": "Biasa",
+        "keterangan": "Naskah dinas yang berkaitan dengan kegiatan keprotokolan secara umum."
+    },
+    {
+        "kode": "PK.02.1",
+        "klasifikasi": "Upacara/Acara Kedinasan",
+        "sifat": "Biasa",
+        "keterangan": "Naskah Dinas yang berkaitan dengan kegiatan Protokoler termasuk upacara bendera, upacara hari besar, upacara pelantikan dan upacara serah terima jabatan."
+    },
+    {
+    "kode": "HM.01",
+    "klasifikasi": "Dokumentasi/Liputan Kegiatan Dinas Pimpinan, Acara Kedinasan dan Peristiwa lain dalam berbagai media",
+    "sifat": "Biasa",
+    "keterangan": "Kegiatan yang berhubungan dengan kehumasan, dalam berbagai media (kertas, foto, video, rekaman suara, dan multimedia)"
+  },
+  {
+    "kode": "HM.02",
+    "klasifikasi": "Pengumpulan, Pengolahan, dan Penyajian Informasi Kelembagaan",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi: kliping koran; bahan dokumentasi mencakup brosur, leaflet, dan poster; plakat; pengumuman; dan pemberitaan."
+  },
+  {
+    "kode": "HM.03",
+    "klasifikasi": "Hubungan KPU dengan Badan Pemerintahan/Instansi",
+    "sifat": "Biasa",
+    "keterangan": "Koordinasi dan hubungan kerja sama antara KPU dengan berbagai lembaga pemerintah maupun non-pemerintah."
+  },
+  {
+    "kode": "HM.03.1",
+    "klasifikasi": "Hubungan dengan lembaga pemerintah",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait hubungan kerja sama dengan instansi pemerintah."
+  },
+  {
+    "kode": "HM.03.2",
+    "klasifikasi": "Hubungan dengan organisasi sosial dan lembaga swadaya masyarakat (LSM)",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait interaksi dengan organisasi sosial dan LSM."
+  },
+  {
+    "kode": "HM.03.3",
+    "klasifikasi": "Hubungan dengan perusahaan",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait hubungan kerja sama dengan pihak swasta atau perusahaan."
+  },
+  {
+    "kode": "HM.03.4",
+    "klasifikasi": "Hubungan dengan lembaga pendidikan",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi sekolah dan perguruan tinggi mencakup naskah: magang; Pendidikan Sistem Ganda (PSG); dan Praktek Kerja Lapangan (PKL)."
+  },
+  {
+    "kode": "HM.03.5",
+    "klasifikasi": "Forum kehumasan",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi: badan koordinasi hubungan masyarakat; perhimpunan hubungan masyarakat; atau forum lain dalam kaitannya dengan kehumasan."
+  },
+  {
+    "kode": "HM.03.6",
+    "klasifikasi": "Hubungan dengan media massa",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi naskah: siaran pers, konferensi pers, atau press release; kunjungan wartawan/peliputan; dan wawancara."
+  },
+  {
+    "kode": "HM.04",
+    "klasifikasi": "Master Publikasi Melalui Media Cetak dan Elektronik",
+    "sifat": "Penting",
+    "keterangan": "Arsip induk atau naskah asli publikasi yang dilakukan melalui berbagai kanal media cetak dan elektronik."
+  },
+  {
+    "kode": "HM.05",
+    "klasifikasi": "Duplikasi Publikasi Melalui Media Cetak dan Elektronik",
+    "sifat": "Biasa",
+    "keterangan": "Salinan atau penggandaan dari materi publikasi yang telah diterbitkan."
+  },
+  {
+    "kode": "HM.06",
+    "klasifikasi": "Pameran/Sayembara/Lomba, Festival, Pembuatan Spanduk, dan Iklan",
+    "sifat": "Biasa",
+    "keterangan": "Kegiatan promosi dan sosialisasi melalui ajang perlombaan, pameran, serta pembuatan materi iklan luar ruang."
+  },
+  {
+    "kode": "HM.07",
+    "klasifikasi": "Penghargaan/Tanda Kenang-Kenangan dan Administrasi Pemberian Penghargaan/Tanda Kenang-Kenangan kepada Masyarakat yang Memiliki Jasa Prestasi Besar",
+    "sifat": "Penting",
+    "keterangan": "Dokumentasi terkait pemberian apresiasi dan tanda jasa kepada pihak masyarakat atas kontribusi atau prestasi tertentu."
+  },
+  {
+    "kode": "HM.08",
+    "klasifikasi": "Ucapan Terima Kasih, Ucapan Selamat, Bela Sungkawa, dan Permohonan Maaf",
+    "sifat": "Biasa",
+    "keterangan": "Surat atau naskah dinas berisi ungkapan empati, apresiasi, atau permohonan maaf secara formal kepada instansi atau perorangan."
+  },
+  {
+    "kode": "PUS.01",
+    "klasifikasi": "Penyimpanan Deposit Bahan Pustaka",
+    "sifat": "Penting",
+    "keterangan": "Induk klasifikasi mengenai kegiatan penerimaan dan penyimpanan wajib simpan karya cetak dan karya rekam."
+  },
+  {
+    "kode": "PUS.01.1",
+    "klasifikasi": "Bukti penerimaan koleksi bahan pustaka deposit",
+    "sifat": "Penting",
+    "keterangan": "Dokumen bukti sah penerimaan materi perpustakaan dari penerbit atau pengusaha rekaman sebagai bagian dari koleksi nasional."
+  },
+  {
+    "kode": "PUS.01.2",
+    "klasifikasi": "Administrasi pengolahan deposit bahan Pustaka",
+    "sifat": "Biasa",
+    "keterangan": "Catatan administratif internal terkait proses teknis penataan dan inventarisasi bahan pustaka yang masuk melalui jalur deposit."
+  },
+  {
+    "kode": "PUS.02",
+    "klasifikasi": "Pengadaan dan Pengelolaan Bahan Pustaka",
+    "sifat": "Penting",
+    "keterangan": "Klasifikasi utama untuk seluruh rangkaian proses perolehan koleksi baru hingga penataan koleksi agar siap dilayankan."
+  },
+  {
+    "kode": "PUS.02.1",
+    "klasifikasi": "Buku induk koleksi",
+    "sifat": "Penting",
+    "keterangan": "Daftar permanen yang mencatat semua koleksi perpustakaan secara kronologis berdasarkan tanggal penerimaan/inventarisasi."
+  },
+  {
+    "kode": "PUS.02.2",
+    "klasifikasi": "Daftar buku terseleksi",
+    "sifat": "Biasa",
+    "keterangan": "Daftar judul buku yang telah dipilih berdasarkan kriteria kebutuhan pemustaka sebelum masuk tahap pemesanan."
+  },
+  {
+    "kode": "PUS.02.3",
+    "klasifikasi": "Daftar buku dalam pemesanan",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen pelacakan buku yang sedang diproses ordernya kepada penyedia atau distributor."
+  },
+  {
+    "kode": "PUS.02.4",
+    "klasifikasi": "Daftar buku dalam permintaan",
+    "sifat": "Biasa",
+    "keterangan": "Kumpulan usulan atau permintaan judul buku tertentu dari pemustaka atau unit kerja."
+  },
+  {
+    "kode": "PUS.02.5",
+    "klasifikasi": "Daftar penerimaan bahan pustaka hasil pembelian, hadiah deposit, hibah",
+    "sifat": "Penting",
+    "keterangan": "Catatan resmi mengenai asal-usul perolehan bahan pustaka baik dari anggaran negara, pemberian, maupun sumbangan pihak lain."
+  },
+  {
+    "kode": "PUS.02.6",
+    "klasifikasi": "Daftar pengiriman bahan pustaka surplus",
+    "sifat": "Biasa",
+    "keterangan": "Dokumentasi pengiriman koleksi yang berlebih ke perpustakaan lain atau unit yang membutuhkan."
+  },
+  {
+    "kode": "PUS.02.7",
+    "klasifikasi": "Lembar kerja pengolahan Buram dan Pengkatalogan (BP)",
+    "sifat": "Biasa",
+    "keterangan": "Lembar kerja teknis pustakawan dalam menentukan deskripsi bibliografis dan nomor klasifikasi buku."
+  },
+  {
+    "kode": "PUS.02.8",
+    "klasifikasi": "Shelt List/Jajaran Kartu Utama (Master List)",
+    "sifat": "Penting",
+    "keterangan": "Daftar kendali koleksi sesuai susunan di rak, digunakan sebagai alat kontrol stok opname perpustakaan."
+  },
+  {
+    "kode": "PUS.02.9",
+    "klasifikasi": "Daftar tambahan buku (Assesion List)",
+    "sifat": "Biasa",
+    "keterangan": "Daftar koleksi baru yang diterbitkan secara berkala untuk menginformasikan pemustaka tentang buku-buku terbaru."
+  },
+  {
+    "kode": "PUS.03",
+    "klasifikasi": "Pembentukan Keanggotaan Perpustakaan",
+    "sifat": "Biasa",
+    "keterangan": "Segala dokumen yang berkaitan dengan pendaftaran, syarat, dan pengelolaan data anggota perpustakaan."
+  },
+  {
+    "kode": "PLB.01.1",
+    "klasifikasi": "Jurnal Kepemiluan",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait dengan publikasi Jurnal Kepemiluan."
+  },
+  {
+    "kode": "PLB.01.2",
+    "klasifikasi": "Buku Bunga Rampai Kepemiluan",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait penyusunan dan penerbitan Buku Bunga Rampai Kepemiluan."
+  },
+  {
+    "kode": "PLB.01.3",
+    "klasifikasi": "Riset Nasional Kepemiluan",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait pelaksanaan kegiatan Riset Nasional Kepemiluan."
+  },
+  {
+    "kode": "PLB.01.4",
+    "klasifikasi": "Hasil Kajian/Analisis Kepemiluan Pusat dan Daerah",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen laporan hasil kajian atau analisis mengenai kepemiluan baik di tingkat pusat maupun daerah."
+  },
+  {
+    "kode": "PLB.01.5",
+    "klasifikasi": "Hasil Seminar Nasional dan Internasional",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen hasil pelaksanaan seminar kepemiluan dalam lingkup nasional maupun internasional."
+  },
+  {
+    "kode": "PLB.01.6",
+    "klasifikasi": "Izin Penelitian Kepemiluan",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait pemberian izin untuk melakukan penelitian di bidang kepemiluan."
+  },
+  {
+    "kode": "PLB.02.1",
+    "klasifikasi": "Perencanaan Diklat",
+    "sifat": "Biasa",
+    "keterangan": "Naskah berkaitan dengan kegiatan analisis kebutuhan diklat dan rencana penyelenggaraan diklat tahunan."
+  },
+  {
+    "kode": "PLB.02.2",
+    "klasifikasi": "Kelengkapan Diklat",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi naskah yang berkaitan dengan pedoman kediklatan, kurikulum diklat, modul diklat, panduan fasilitator, saran/rekomendasi penyelenggaraan diklat, dan notulen sosialisasi rapat Kebijakan diklat."
+  },
+{  
+    "kode": "PLB.02.3",
+    "klasifikasi": "Penyelenggaraan Diklat",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi: surat pemanggilan peserta; surat keputusan tim penyelenggara diklat; surat keputusan tim pengajar diklat; panduan diklat; laporan panitia penyelenggara diklat; sambutan pembukaan penyelenggara diklat; daftar peserta diklat; bahan ajar diklat; daftar hadir peserta diklat; daftar hadir widyaiswara; formulir evaluasi diklat; formulir evaluasi widyaiswara; hasil formulasi evaluasi peserta diklat; Sertifikat/STPP; sambutan penutup diklat; laporan penyelengaraan diklat; evaluasi penyelenggaraan diklat; dan evaluasi alumni pasca diklat."
+  },
+  {
+    "kode": "PLB.02.4",
+    "klasifikasi": "Registrasi Sertifikat/STTPL Peserta Diklat",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi: surat permohonan kode registrasi; buku registrasi; dan surat penyampaian kode registrasi."
+  },
+  {
+    "kode": "PLB.02.5",
+    "klasifikasi": "Akreditasi Lembaga Diklat",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi: surat permohonan akreditasi; berita acara rapat verifikasi; berita acara rapat tim penilai; surat keputusan penetapan akreditasi; sertifikat akreditasi; dan laporan akreditasi lembaga diklat."
+  },
+  {
+    "kode": "PLB.02.6",
+    "klasifikasi": "Sertifikasi Sumber Daya Manusia Kediklatan",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi: surat permohonan sertifikasi; laporan hasil verifikasi lapangan; berita acara rapat verifikasi; berita acara rapat tim penilai; surat keputusan penetapan sertifikasi; sertifikat sertifikasi; dan laporan sertifikasi individual."
+  },
+  {
+    "kode": "PLB.02.7",
+    "klasifikasi": "Sistem Informasi Diklat",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi: data lembaga diklat; data prasarana diklat; data sarana diklat; data pengelola diklat; data penyelenggara diklat; data widyaiswara; dan data program diklat."
+  },
+  {
+    "kode": "TIK.01",
+    "klasifikasi": "Rencana Strategis/Master Plan Pembangunan Sistem Informasi Manajemen (SIM)",
+    "sifat": "Penting",
+    "keterangan": "Naskah mengenai rencana strategis atau cetak biru pembangunan sistem informasi manajemen."
+  },
+  {
+    "kode": "TIK.02",
+    "klasifikasi": "Dokumen Arsitektur",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi naskah-naskah: sistem informasi; sistem aplikasi; dan infrastruktur."
+  },
+  {
+    "kode": "TIK.03",
+    "klasifikasi": "Dokumentasi Implementasi",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi naskah-naskah: sistem informasi; sistem aplikasi; dan infrastruktur."
+  },
+  {
+    "kode": "TIK.04",
+    "klasifikasi": "Laporan Hasil Perekaman dan Pemutakhiran Data",
+    "sifat": "Biasa",
+    "keterangan": "Naskah terkait hasil rekaman data terbaru dan proses pembaharuan data secara berkala."
+  },
+  {
+    "kode": "TIK.05",
+    "klasifikasi": "Migrasi sistem aplikasi, data, dan dokumen hosting",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi naskah-naskah: perencanaan migrasi; pelaksanaan migrasi; berita acara kegiatan migrasi; daftar sistem aplikasi dan data yang dimigrasi; dan laporan hasil migrasi."
+  },
+  {
+    "kode": "TIK.06",
+    "klasifikasi": "Dokumen Hosting",
+    "sifat": "Biasa",
+    "keterangan": "Naskah yang berkaitan dengan formulir permintaan hosting, laporan hasil uji kelayakan, dan laporan hasil pelaksanaan hosting."
+  },
+  {
+    "kode": "TIK.07",
+    "klasifikasi": "Layanan back up data digital",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait prosedur dan pelaksanaan pencadangan data digital."
+  },
+  {
+    "kode": "PW.01.1",
+    "klasifikasi": "Rencana Strategis Pengawasan",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait rencana strategis pengawasan (PW.01)."
+  },
+  {
+    "kode": "PW.01.2",
+    "klasifikasi": "Rencana Kerja Tahunan",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait rencana kerja tahunan pengawasan (PW.01)."
+  },
+  {
+    "kode": "PW.01.3",
+    "klasifikasi": "Rencana Kinerja Tahunan",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait rencana kinerja tahunan pengawasan (PW.01)."
+  },
+  {
+    "kode": "PW.01.4",
+    "klasifikasi": "Penetapan Kinerja Tahunan",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait penetapan kinerja tahunan pengawasan (PW.01)."
+  },
+  {
+    "kode": "PW.02.1",
+    "klasifikasi": "Laporan hasil pemeriksaan non keuangan",
+    "sifat": "Penting",
+    "keterangan": "Dokumen pelaksanaan pengawasan terkait laporan hasil pemeriksaan non keuangan."
+  },
+  {
+    "kode": "PW.02.2",
+    "klasifikasi": "Laporan Perkembangan Penanganan Surat Pengaduan Masyarakat tentang Keuangan",
+    "sifat": "Penting",
+    "keterangan": "Dokumen pelaksanaan pengawasan terkait laporan perkembangan penanganan surat pengaduan masyarakat tentang keuangan."
+  },
+  {
+    "kode": "PW.02.3",
+    "klasifikasi": "Laporan Pemutakhiran Data Tindak Lanjut Temuan yang Bermasalah",
+    "sifat": "Penting",
+    "keterangan": "Dokumen pelaksanaan pengawasan terkait laporan pemutakhiran data tindak lanjut temuan yang bermasalah."
+  },
+  {
+    "kode": "PW.02.4",
+    "klasifikasi": "Laporan Kegiatan Pendampingan Penyusunan Laporan Keuangan",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen pelaksanaan pengawasan terkait laporan kegiatan pendampingan penyusunan laporan keuangan."
+  },
+  {
+    "kode": "PW.02.5",
+    "klasifikasi": "Good Corporate Governance (Dokumen Pakta Integritas)",
+    "sifat": "Penting",
+    "keterangan": "Dokumen pelaksanaan pengawasan terkait Good Corporate Governance (Dokumen Pakta Integritas)."
+  },
+  {
+    "kode": "PW.02.6",
+    "klasifikasi": "Kertas Kerja Audit",
+    "sifat": "Rahasia",
+    "keterangan": "Dokumen pelaksanaan pengawasan berupa kertas kerja audit."
+  },
+  {
+    "kode": "PW.02.7",
+    "klasifikasi": "Kertas Kerja Evaluasi",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen pelaksanaan pengawasan berupa kertas kerja evaluasi."
+  },
+  {
+    "kode": "PW.02.8",
+    "klasifikasi": "Kertas Kerja Verifikasi",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen pelaksanaan pengawasan berupa kertas kerja verifikasi."
+  },
+  {
+    "kode": "PW.02.9",
+    "klasifikasi": "Laporan Hasil Evaluasi",
+    "sifat": "Penting",
+    "keterangan": "Dokumen pelaksanaan pengawasan berupa laporan hasil evaluasi."
+  },
+  {
+    "kode": "PW.02.10",
+    "klasifikasi": "Laporan Verifikasi",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen pelaksanaan pengawasan berupa laporan verifikasi."
+  },
+  {
+    "kode": "PW.02.11",
+    "klasifikasi": "Laporan Hasil Pemeriksaan atas Laporan Keuangan oleh Badan Pemeriksa Keuangan Republik Indonesia (BPK RI)",
+    "sifat": "Sangat Penting",
+    "keterangan": "Dokumen pelaksanaan pengawasan berupa laporan hasil pemeriksaan atas laporan keuangan oleh Badan Pemeriksa Keuangan Republik Indonesia (BPK RI)."
+  },
+  {
+    "kode": "PW.02.12",
+    "klasifikasi": "Hasil Pengawasan dan Pelaksanaan Internal oleh Inspektorat",
+    "sifat": "Penting",
+    "keterangan": "Dokumen pelaksanaan pengawasan berupa hasil pengawasan dan pelaksanaan internal oleh inspektorat."
+  },
+  {
+    "kode": "PW.02.13",
+    "klasifikasi": "Laporan Aparat Pemeriksa Fungsional",
+    "sifat": "Penting",
+    "keterangan": "Meliputi: Laporan Hasil Pengawasan (LHP); Memorandum Hasil Pengawasan (MHP); dan Tindak lanjut/Tanggapan LHP."
+  },
+  {
+    "kode": "PW.03",
+    "klasifikasi": "Evaluasi Laporan Akuntabilitas Kinerja Instansi Pemerintah",
+    "sifat": "Penting",
+    "keterangan": "Naskah dinas terkait evaluasi laporan akuntabilitas kinerja instansi pemerintah."
+  },
+  {
+    "kode": "PW.04",
+    "klasifikasi": "Piagam Internal Audit Charter",
+    "sifat": "Penting",
+    "keterangan": "Naskah dinas terkait piagam internal audit charter."
+  },
+  {
+    "kode": "PBJ.01.1",
+    "klasifikasi": "Telaah/Kajian Pengadaan Barang dan Jasa",
+    "sifat": "Biasa",
+    "keterangan": "Layanan pengadaan barang/jasa terkait telaah atau kajian pengadaan barang dan jasa."
+  },
+  {
+    "kode": "PBJ.01.2",
+    "klasifikasi": "Penyusunan Kebijakan/Regulasi/Edaran Pengadaan Barang dan Jasa",
+    "sifat": "Penting",
+    "keterangan": "Layanan pengadaan barang/jasa terkait penyusunan kebijakan, regulasi, atau edaran pengadaan barang dan jasa."
+  },
+  {
+    "kode": "PBJ.01.3",
+    "klasifikasi": "Rencana Umum Pengadaan",
+    "sifat": "Biasa",
+    "keterangan": "Layanan pengadaan barang/jasa terkait rencana umum pengadaan."
+  },
+  {
+    "kode": "PBJ.01.4",
+    "klasifikasi": "Pembuatan Dokumen Surat Tugas Penunjukan Pokja Pemilihan",
+    "sifat": "Biasa",
+    "keterangan": "Layanan pengadaan barang/jasa terkait pembuatan dokumen surat tugas penunjukan pokja pemilihan."
+  },
+  {
+    "kode": "PBJ.01.5",
+    "klasifikasi": "Analisis/Survey Pasar Barang/Jasa",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi naskah yang berkaitan dengan: survey; penyusunan kuisioner; pengumpulan dan pengolahan data; dan laporan survey."
+  },
+  {
+    "kode": "PBJ.01.6",
+    "klasifikasi": "Penyusunan Dokumen Pengadaan Barang dan Jasa",
+    "sifat": "Penting",
+    "keterangan": "Meliputi naskah terkait dokumen persiapan pengadaan antara lain: spesifikasi teknis/KAK; Harga Perkiraan Sendiri (HPS); rancangan kontrak; penetapan uang muka dan/atau jaminan; dan dokumen pemilihan penyedia."
+  },
+  {
+    "kode": "PBJ.01.7",
+    "klasifikasi": "Dokumen Kontrak Pengadaan Barang dan Jasa",
+    "sifat": "Sangat Penting",
+    "keterangan": "Layanan pengadaan barang/jasa terkait dokumen kontrak pengadaan barang dan jasa."
+  },
+  {
+    "kode": "PBJ.01.8",
+    "klasifikasi": "Laporan Monitoring dan Evaluasi Pengadaan Barang dan Jasa",
+    "sifat": "Penting",
+    "keterangan": "Layanan pengadaan barang/jasa terkait laporan monitoring dan evaluasi pengadaan barang dan jasa."
+  },
+  {
+    "kode": "PBJ.02",
+    "klasifikasi": "Laporan Pengadaan Barang dan Jasa",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait laporan pengadaan barang dan jasa secara umum."
+  },
+  {
+    "kode": "PBJ.03.1",
+    "klasifikasi": "Pendampingan Pengadaan Barang dan Jasa",
+    "sifat": "Biasa",
+    "keterangan": "Layanan bimbingan dan pendampingan pengadaan barang dan jasa."
+  },
+  {
+    "kode": "PBJ.03.2",
+    "klasifikasi": "Petunjuk Pelaksanaan Bimbingan Pengadaan Barang dan Jasa",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait petunjuk pelaksanaan bimbingan pengadaan barang dan jasa."
+  },
+  {
+    "kode": "PBJ.03.3",
+    "klasifikasi": "Pendampingan/Konsultasi Hukum Pengadaan Barang dan Jasa",
+    "sifat": "Penting",
+    "keterangan": "Naskah dinas terkait pendampingan atau konsultasi hukum pengadaan barang dan jasa."
+  },
+  {
+    "kode": "PBJ.03.4",
+    "klasifikasi": "Sosialisasi/Bimbingan Teknis Pengadaan Barang dan Jasa",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait sosialisasi atau bimbingan teknis pengadaan barang dan jasa."
+  },
+  {
+    "kode": "LPSE.01.1",
+    "klasifikasi": "Permintaan Update Aplikasi SPSE",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait permintaan pembaruan (update) aplikasi Sistem Pengadaan Secara Elektronik."
+  },
+  {
+    "kode": "LPSE.01.2",
+    "klasifikasi": "Pemeliharaan Aplikasi SPSE",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait pemeliharaan aplikasi Sistem Pengadaan Secara Elektronik."
+  },
+  {
+    "kode": "LPSE.02.1",
+    "klasifikasi": "Verifikasi Penyedia",
+    "sifat": "Penting",
+    "keterangan": "Bagian dari registrasi dan verifikasi akun pengguna LPSE dan SIRUP mencakup verifikasi penyedia."
+  },
+  {
+    "kode": "LPSE.02.2",
+    "klasifikasi": "Permohonan Akun Pengguna LPSE dan SIRUP",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait permohonan akun pengguna untuk LPSE dan Sistem Informasi Rencana Umum Pengadaan."
+  },
+  {
+    "kode": "LPSE.03.1",
+    "klasifikasi": "Pelayanan Layanan Pengadaan Secara Elektronik (LPSE)",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen operasional terkait pelayanan pada helpdesk LPSE."
+  },
+  {
+    "kode": "LPSE.03.2",
+    "klasifikasi": "Penyusunan Laporan Sosialisasi Aplikasi dan Pedoman Rencana Umum Pengadaan",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait penyusunan laporan hasil sosialisasi aplikasi serta pedoman SIRUP."
+  },
+  {
+    "kode": "LPSE.03.3",
+    "klasifikasi": "Penyusunan laporan Monitoring dan Evaluasi Layanan Pengadaan Secara Elektronik",
+    "sifat": "Penting",
+    "keterangan": "Dokumen hasil pengawasan berupa laporan monitoring dan evaluasi layanan LPSE."
+  },
+  {
+    "kode": "LPSE.03.4",
+    "klasifikasi": "Survey Layanan Pengadaan Secara Elektronik",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait pelaksanaan survey kepuasan atau survey layanan LPSE."
+  },
+  {
+    "kode": "SDM.01",
+    "klasifikasi": "Formasi Pegawai",
+    "sifat": "Penting",
+    "keterangan": "Meliputi naskah: usulan dari unit kerja; usulan permintaan formasi kepada Menteri Pendayagunaan Aparatur Negara dan Reformasi Birokrasi dan Kepala Badan Kepegawaian Nasional (BKN); persetujuan Menteri Pendayagunaan Aparatur Negara dan Reformasi Birokrasi; penetapan formasi Aparatur Sipil Negara (ASN); penetapan formasi khusus."
+  },
+  {
+    "kode": "SDM.02.1",
+    "klasifikasi": "Proses Penerimaan Pegawai",
+    "sifat": "Penting",
+    "keterangan": "Meliputi naskah: pengumuman; seleksi administrasi; pemanggilan peserta test; pelaksanaan ujian tertulis; keputusan hasil ujian; wawancara."
+  },
+  {
+    "kode": "SDM.02.2",
+    "klasifikasi": "Penetapan Pengumuman Kelulusan",
+    "sifat": "Penting",
+    "keterangan": "Naskah dinas terkait penetapan pengumuman kelulusan hasil seleksi pegawai."
+  },
+  {
+    "kode": "SDM.02.3",
+    "klasifikasi": "Berkas Lamaran yang Tidak Diterima",
+    "sifat": "Biasa",
+    "keterangan": "Arsip atau berkas fisik lamaran kerja yang dinyatakan tidak lolos seleksi."
+  },
+  {
+    "kode": "SDM.02.4",
+    "klasifikasi": "Pengadaan Pegawai non PNS / ASN",
+    "sifat": "Penting",
+    "keterangan": "Meliputi naskah: pengumuman; seleksi administrasi; pemanggilan peserta test; pelaksanaan ujian tertulis; keputusan hasil ujian; wawancara."
+  },
+  {
+    "kode": "SDM.02.5",
+    "klasifikasi": "Penetapan Pengumuman Kelulusan",
+    "sifat": "Penting",
+    "keterangan": "Naskah dinas terkait penetapan pengumuman kelulusan untuk pegawai non PNS/ASN."
+  },
+  {
+    "kode": "SDM.02.6",
+    "klasifikasi": "Seleksi Anggota KPU",
+    "sifat": "Rahasia",
+    "keterangan": "Meliputi naskah: panitia seleksi; hasil seleksi; penetapan; Penggantian Antar Waktu (PAW Anggota)."
+  },
+  {
+    "kode": "SDM.02.7",
+    "klasifikasi": "Seleksi Anggota KPU Provinsi dan KPU Kabupaten/Kota",
+    "sifat": "Rahasia",
+    "keterangan": "Meliputi naskah: panitia seleksi; hasil seleksi; Keputusan Penetapan."
+  },
+  {
+    "kode": "SDM.02.8",
+    "klasifikasi": "Pengunduran diri Anggota KPU, KPU Provinsi, dan KPU kabupaten/ Kota dan Tindak Lanjut Putusan Dewan Kehormatan Penyelenggara Pemilu",
+    "sifat": "Penting",
+    "keterangan": "Meliputi naskah: berkas permohonan pengunduran diri; kategori pengunduran diri; Keputusan Pengunduran diri."
+  },
+  {
+    "kode": "SDM.02.9",
+    "klasifikasi": "Pemberian Sanksi atas Pengawasan Internal",
+    "sifat": "Rahasia",
+    "keterangan": "Naskah dinas terkait penjatuhan sanksi berdasarkan hasil pengawasan internal."
+  },
+  {
+    "kode": "SDM.03.1",
+    "klasifikasi": "Pendidikan dan Pelatihan/Kursus/Tugas Belajar/Ujian Dinas/Izin Belajar Pegawai",
+    "sifat": "Biasa",
+    "keterangan": "Mencakup naskah: Surat Perintah/Surat Tugas (ST)/SK/Surat; Laporan Kegiatan Pengembangan Diri."
+  },
+  {
+    "kode": "SDM.03.2",
+    "klasifikasi": "Ujian Kompetensi",
+    "sifat": "Penting",
+    "keterangan": "Meliputi: Assesment test pegawai; Pemetaan/talent mapping pegawai."
+  },
+  {
+    "kode": "SDM.03.3",
+    "klasifikasi": "Penghargaan dan Tanda Jasa",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait pemberian penghargaan atau tanda jasa kepada pegawai."
+  },
+  {
+    "kode": "SDM.03.4",
+    "klasifikasi": "Pembinaan Mental Kepegawaian",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait kegiatan pembinaan mental dan rohani pegawai."
+  },
+  {
+    "kode": "SDM.04.1",
+    "klasifikasi": "Disiplin Pegawai",
+    "sifat": "Penting",
+    "keterangan": "Meliputi: daftar hadir; rekapitulasi daftar hadir."
+  },
+  {
+    "kode": "SDM.04.2",
+    "klasifikasi": "Berkas Hukuman Disiplin",
+    "sifat": "Rahasia",
+    "keterangan": "Meliputi naskah hukuman: ringan; sedang; berat."
+  },
+  {
+    "kode": "SDM.04.3",
+    "klasifikasi": "Pemberhentian Pegawai Tanpa Hak Pensiun",
+    "sifat": "Penting",
+    "keterangan": "Naskah dinas terkait pemberhentian pegawai secara tidak hormat atau tanpa hak pensiun."
+  },
+  {
+    "kode": "SDM.04.4",
+    "klasifikasi": "Pengaduan/Permasalahan Kepegawaian",
+    "sifat": "Penting",
+    "keterangan": "Meliputi: penyelesaian pengelolaan keberatan pegawai; laporan permasalahan pegawai."
+  },
+  {
+    "kode": "SDM.04.5",
+    "klasifikasi": "Perselisihan/Sengketa Kepegawaian",
+    "sifat": "Penting",
+    "keterangan": "Naskah dinas terkait penanganan sengketa hukum atau perselisihan pegawai."
+  },
+  {
+    "kode": "SDM.04.6",
+    "klasifikasi": "Usul Pemberhentian dan Penetapan Pensiun Pegawai/Janda/Dudanya dan PNS yang Tewas",
+    "sifat": "Penting",
+    "keterangan": "Naskah dinas terkait pengusulan pemberhentian dan penetapan hak pensiun."
+  },
+  {
+    "kode": "SDM.05.1",
+    "klasifikasi": "Mutasi Pegawai",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi: Alih Status; Pindah Instansi; Pindah Wilayah Kerja; Dipekerjakan; Mutasi Antar Unit."
+  },
+  {
+    "kode": "SDM.05.2",
+    "klasifikasi": "Badan Pertimbangan Jabatan dan Kepangkatan (Baperjakat)",
+    "sifat": "Rahasia",
+    "keterangan": "Naskah dinas terkait hasil sidang dan keputusan Baperjakat."
+  },
+  {
+    "kode": "SDM.06.1",
+    "klasifikasi": "Surat Perintah Dinas/Surat Tugas",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait perintah penugasan pegawai."
+  },
+  {
+    "kode": "SDM.06.2",
+    "klasifikasi": "Cuti Besar",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait permohonan dan pemberian cuti besar pegawai."
+  },
+  {
+    "kode": "SDM.06.3",
+    "klasifikasi": "Cuti Sakit, Cuti Bersalin, dan Cuti Tahunan",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait permohonan dan pemberian cuti sakit, bersalin, serta tahunan."
+  },
+  {
+    "kode": "SDM.06.4",
+    "klasifikasi": "Cuti Alasan Penting",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait permohonan dan pemberian cuti karena alasan mendesak atau penting."
+  },
+  {
+    "kode": "SDM.06.5",
+    "klasifikasi": "Cuti Diluar Tanggungan Negara (CLTN)",
+    "sifat": "Penting",
+    "keterangan": "Naskah dinas terkait permohonan dan pemberian cuti di luar tanggungan negara."
+  },
+  {
+    "kode": "SDM.06.6",
+    "klasifikasi": "Dokumentasi Identitas Pegawai",
+    "sifat": "Penting",
+    "keterangan": "Meliputi: Usul Penetapan Kartu Pegawai (Karpeg)/Kartu PNS Elektronik (KPE)/Kartu Istri (Karis)/Kartu Suami (Karsu); Keterangan Penerimaan Pembayaran Penghasilan Pegawai (KP4)."
+  },
+  {
+    "kode": "SDM.06.7",
+    "klasifikasi": "Kesejahteraan Pegawai",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi: Layanan Pemeliharaan Kesehatan Pegawai; Layanan Asuransi Pegawai; Layanan Tabungan Perumahan; Layanan Bantuan Sosial; Layanan Olahraga dan Rekreasi; Layanan Beras/Pakaian Dinas; Layanan Pengurusan Jenazah."
+  },
+  {
+    "kode": "SDM.07",
+    "klasifikasi": "Laporan Harta Kekayaan Aparatur Sipil Negara (LHKASN)",
+    "sifat": "Rahasia",
+    "keterangan": "Dokumen laporan berkala harta kekayaan ASN."
+  },
+  {
+    "kode": "SDM.08",
+    "klasifikasi": "Laporan Harta Kekayaan Penyelenggara Negara (LHKPN) (Ketua KPU dan Anggota KPU)",
+    "sifat": "Rahasia",
+    "keterangan": "Dokumen laporan harta kekayaan untuk pejabat negara/pimpinan KPU."
+  },
+  {
+    "kode": "SDM.09",
+    "klasifikasi": "Berkas Perseorangan ASN",
+    "sifat": "Rahasia",
+    "keterangan": "Meliputi naskah: nota usul penetapan NIP; nota usul kenaikan pangkat/golongan/jabatan; SKP; PAK; pakta integritas; Berita Acara Sumpah/Janji; SK Pengangkatan/Pemberhentian; SK Perubahan Data Dasar; Hasil Pengujian Kesehatan; Ijazah; SK Mutasi; Keputusan Pensiun; total mencakup 58 item naskah sesuai dokumen."
+  },
+  {
+    "kode": "SDM.10.1",
+    "klasifikasi": "Ketua dan Anggota KPU",
+    "sifat": "Rahasia",
+    "keterangan": "Berkas perseorangan terkait data individu Ketua dan Anggota KPU pusat."
+  },
+  {
+    "kode": "SDM.10.2",
+    "klasifikasi": "Ketua dan Anggota KPU Provinsi",
+    "sifat": "Rahasia",
+    "keterangan": "Berkas perseorangan terkait data individu Ketua dan Anggota KPU tingkat Provinsi."
+  },
+  {
+    "kode": "SDM.10.3",
+    "klasifikasi": "Ketua dan Anggota KPU Kabupaten/Kota",
+    "sifat": "Rahasia",
+    "keterangan": "Berkas perseorangan terkait data individu Ketua dan Anggota KPU tingkat Kabupaten/Kota."
+  },
+  {
+    "kode": "KU.01.1",
+    "klasifikasi": "Penyusunan Rencana Anggaran Pendapatan dan Belanja Negara",
+    "sifat": "Penting",
+    "keterangan": "Meliputi naskah: dokumen Rencana Anggaran Kerja Instansi Pemerintahan (RAKIP) dan Dokumen Rencana Kerja Anggaran (RKA) KPU; dokumen Rancangan Satuan Kerja Instansi Pemerintah (RASKIP)/ Standar Biaya Khusus (SKB)."
+  },
+  {
+    "kode": "KU.01.2",
+    "klasifikasi": "Penyampaian Rancangan Anggaran Pendapatan dan Belanja Negara (RAPBN) kepada Dewan Perwakilan Rakyat (DPR)",
+    "sifat": "Penting",
+    "keterangan": "Meliputi naskah: Nota keuangan Pemerintahan dan rancangan Undang-undang terkait RAPBN; Nota Keuangan Pemerintah; Materi RAPBN dari Lembaga Negara dan Badan Pemerintah (LNBP)."
+  },
+  {
+    "kode": "KU.01.3",
+    "klasifikasi": "Pembahasan RAPBN oleh Komisi DPR",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait proses pembahasan RAPBN bersama Komisi Dewan Perwakilan Rakyat."
+  },
+  {
+    "kode": "KU.01.4",
+    "klasifikasi": "Nota Jawaban Pemerintah atas Pertanyaan DPR",
+    "sifat": "Biasa",
+    "keterangan": "Dokumen resmi berisi jawaban pemerintah terhadap pertanyaan-pertanyaan yang diajukan oleh DPR."
+  },
+  {
+    "kode": "KU.01.5",
+    "klasifikasi": "Undang-Undang terkait Anggaran Pendapatan dan Belanja Negara (APBN) dan Rencana Pembangunan Tahunan (RAPETA)",
+    "sifat": "Penting",
+    "keterangan": "Naskah dinas terkait regulasi Undang-Undang APBN dan dokumen rencana pembangunan tahunan."
+  },
+  {
+    "kode": "KU.02.1",
+    "klasifikasi": "Ketetapan Pagu Indikatif/Pagu Sementara",
+    "sifat": "Biasa",
+    "keterangan": "Naskah dinas terkait penetapan pagu indikatif atau pagu sementara anggaran."
+  },
+  {
+    "kode": "KU.02.2",
+    "klasifikasi": "Ketetapan Pagu Definitif",
+    "sifat": "Penting",
+    "keterangan": "Naskah dinas terkait penetapan pagu definitif anggaran."
+  },
+  {
+    "kode": "KU.02.3",
+    "klasifikasi": "Rencana Kerja Anggaran (RKA) Lembaga Negara dan Badan Pemerintahan (LNBP)",
+    "sifat": "Penting",
+    "keterangan": "Dokumen rencana kerja dan anggaran untuk lingkup LNBP."
+  },
+  {
+    "kode": "KU.02.4",
+    "klasifikasi": "Daftar Isian Pelaksanaan Anggaran (DIPA), Petunjuk Operasional Kegiatan (POK) dan Revisinya",
+    "sifat": "Sangat Penting",
+    "keterangan": "Naskah dinas terkait dokumen DIPA, petunjuk operasional pelaksanaan kegiatan, serta dokumen revisi anggarannya."
+  },
+  {
+    "kode": "KU.02.5",
+    "klasifikasi": "Ketentuan/Peraturan yang menyangkut Pelaksanaan Penata-usahaan dan Pertanggungjawaban Anggaran",
+    "sifat": "Penting",
+    "keterangan": "Naskah dinas terkait aturan pelaksanaan tata usaha keuangan dan pertanggungjawaban anggaran."
+  },
+  {
+    "kode": "KU.03.1",
+    "klasifikasi": "Keputusan KPU terkait Penetapan Pejabat Perbendaharaan",
+    "sifat": "Penting",
+    "keterangan": "Meliputi naskah: Kuasa Pengguna Anggaran/Barang; Keputusan Sekretaris Jenderal terkait Penetapan Pejabat Pembuat Komitmen (PPK), PjSPM, PBJ Pusat; Keputusan Sekretaris Jenderal terkait Penetapan Kuasa Pengguna Anggaran (KPA)/ Barang Sekretariat."
+  },
+  {
+    "kode": "KU.03.2",
+    "klasifikasi": "Pendapatan Negara",
+    "sifat": "Biasa",
+    "keterangan": "Meliputi naskah: Surat Setoran Pajak (SSP); Surat Setoran Bukan Pajak (SSBP); Bukti Penerimaan Negara Bukan Pajak (PNBP); Penerimaan Sisa Anggaran Lebih dan Saldo Kas atau Surat Setoran Pengembalian Belanja (SSPB); Penatausahaan Barang Milik Negara (BMN)."
+  },
+  {
+    "kode": "KU.03.3",
+    "klasifikasi": "Belanja Negara",
+    "sifat": "Penting",
+    "keterangan": "Meliputi naskah: Surat Penyedia Dana (SPP-UP, SPP-DU/TU, SPP-LS); Dokumen Belanja Pegawai (Daftar Gaji, Honor Kehormatan, Tunjangan, Uang Makan, Uang lembur, dan Perjalanan Dinas); Dokumen Belanja beserta Data pendukungnya (Dokumen uang muka, Penagihan/Invoice, kuitansi, Faktur Pajak, Perjanjian, SP KBAP, Surat Pernyataan, Berita Acara Penyelesaian Pekerjaan/Serah terima, Surat Permintaan Pembayaran (SPP), ST, Undangan, Daftar Hadir, Keputusan, Berita Acara Serah Terima Barang); Laporan Pertanggungjawaban Anggaran (Buku Kas Umum (BKU), Buku Kas Pembantu (BKP), Buku/Kartu Pengawasan Kredit Anggaran); Laporan Pertanggungjawaban (LPJ) KPU, KPU Provinsi, dan KPU Kabupaten/Kota; Dokumen Akuntansi Keuangan (Berita Acara Pemeriksaan Kas, Kas/Register Penutupan Kas, Arsip Data Komputer, Berita Acara Rekonsiliasi Internal); Verifikasi anggaran (nota hasil verifikasi, jawaban hasil verifikasi); Laporan keuangan tahunan (Laporan Realisasi Anggaran (LRA), neraca, catatan atas laporan keuangan, Laporan Pembukuan Equitas (LPE), Laporan Operasional (LO))."
+  },
+  {
+    "kode": "KU.03.4",
+    "klasifikasi": "Reviuv Laporan Keuangan",
+    "sifat": "Penting",
+    "keterangan": "Meliputi naskah: Sistem Akuntansi Instansi (SAI); manual implementasi SAI; kebijakan akuntansi; arsip data komputer dan berita acara rekonsiliasi; laporan realisasi semesteran APBN."
+  },
+  {
+    "kode": "KU.03.5",
+    "klasifikasi": "Dana Hibah Dalam Negeri",
+    "sifat": "Penting",
+    "keterangan": "Meliputi naskah: dokumen usulan anggaran; naskah perjanjian di bank daerah; RKA/RKB; pakta integritas; SPTJM; persetujuan nomor register; persetujuan pembukaan rekening; persetujuan revisi anggaran; pengesahan belanja (SP2HL, SPHL, SP4HL, SP3HL); Bukti setoran pengembalian Hibah."
+  },
+  {
+    "kode": "KU.03.6",
+    "klasifikasi": "Pertanggungjawaban Keuangan Negara (Dokumen Penyelesaian kerugian Negara)",
+    "sifat": "Rahasia",
+    "keterangan": "Meliputi naskah: Tuntutan Perbendaharaan; Tuntutan ganti rugi."
+  }
 ]
