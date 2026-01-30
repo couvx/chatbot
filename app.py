@@ -8,7 +8,7 @@ from thefuzz import fuzz
 # --- 1. CONFIG & STYLING ---
 st.set_page_config(page_title="DinasChat Pro v2", page_icon="🤖", layout="centered")
 
-# --- 2. CORE FUNCTIONS (NLP & SEARCH) ---
+# --- 2. CORE FUNCTIONS ---
 
 @st.cache_resource
 def init_nlp():
@@ -19,13 +19,14 @@ def init_nlp():
 def load_db():
     """Memuat database JSON secara aman"""
     try:
+        # Ganti nama file sesuai dengan file JSON Anda
         with open('db_kode.json', 'r', encoding='utf-8') as f:
             kode_db = json.load(f)
         with open('db_jenis.json', 'r', encoding='utf-8') as f:
             jenis_db = json.load(f)
         return kode_db, jenis_db
     except FileNotFoundError:
-        return None, None
+        return [], []
 
 def detect_intent(prompt):
     """Smart Intent Detection menggunakan set intersection"""
@@ -48,26 +49,29 @@ def smart_search(query, db, stemmer):
     scored_results = []
     
     for item in db:
-        content = f"{item['klasifikasi']} {item['keterangan']}".lower()
+        # Mengambil data dengan default string kosong jika key tidak ada
+        klasifikasi = item.get('klasifikasi', '').lower()
+        keterangan = item.get('keterangan', '').lower()
+        kode = item.get('kode', '').lower()
+        content = f"{klasifikasi} {keterangan}"
         
-        # 1. Base Score menggunakan Token Set Ratio (handal untuk urutan kata acak)
+        # 1. Base Score menggunakan Token Set Ratio
         score = fuzz.token_set_ratio(query_clean, content)
         
-        # 2. Bonus Score: Exact Code Match (Sangat Penting)
-        if query_clean in item['kode'].lower():
+        # 2. Bonus Score: Exact Code Match
+        if query_clean in kode:
             score += 40
             
         # 3. Bonus Score: Stemmed Keyword Match
         if query_stemmed in content:
             score += 15
 
-        if score > 60: # Threshold minimal relevansi
+        if score > 60:
             item_copy = item.copy()
-            item_copy['score'] = min(score, 100) # Cap di 100%
+            item_copy['score'] = min(score, 100)
             scored_results.append(item_copy)
             
-    # Sorting berdasarkan skor tertinggi
-    return sorted(scored_results, key=lambda x: x['score'], reverse=True)
+    return sorted(scored_results, key=lambda x: x.get('score', 0), reverse=True)
 
 def write_log(query, intent, status):
     with open("chatbot_log.txt", "a", encoding="utf-8") as f:
@@ -85,7 +89,7 @@ if "messages" not in st.session_state:
 
 # --- 4. SIDEBAR ---
 with st.sidebar:
-    st.title("🤖 Control Panel")
+    st.title("⚙️ Control Panel")
     if st.button("🔄 Update Database", use_container_width=True):
         st.cache_data.clear()
         st.success("Database disegarkan!")
@@ -96,67 +100,69 @@ with st.sidebar:
         st.rerun()
 
     st.divider()
-    st.caption("Aplikasi ini menggunakan Fuzzy Logic & Stemming Sastrawi untuk akurasi pencarian.")
+    st.caption("Status: Active | Engine: Fuzzy Logic & Sastrawi")
 
 # --- 5. CHAT INTERFACE ---
 st.title("🤖 DinasChat Pro")
-st.markdown("Cari kode klasifikasi (Contoh: `PP.01`) atau jenis naskah (Contoh: `Surat Edaran`).")
 
-# Render Riwayat Chat
+# Tampilkan riwayat chat
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
-        if "results" in msg:
+        # Cek apakah ada data pencarian di dalam pesan
+        if "results" in msg and msg["results"]:
             for r in msg["results"]:
-                label = "✅ Sangat Relevan" if r['score'] > 85 else "🔍 Relevan"
-                color = "green" if r['score'] > 85 else "orange"
-                with st.expander(f"📍 {r['kode']} - {r['klasifikasi']}"):
-                    st.markdown(f":{color}[**{label}** ({r['score']}% match)]")
-                    st.write(f"**Sifat:** {r['sifat']}")
-                    st.info(f"**Keterangan:** {r['keterangan']}")
+                s = r.get('score', 0)
+                lbl = "✅ Sangat Relevan" if s > 85 else "🔍 Relevan"
+                clr = "green" if s > 85 else "orange"
+                with st.expander(f"📍 {r.get('kode', 'N/A')} - {r.get('klasifikasi', 'Detail')}"):
+                    st.markdown(f":{clr}[**{lbl}** ({s}% match)]")
+                    st.write(f"**Sifat:** {r.get('sifat', '-')}")
+                    st.info(f"**Keterangan:** {r.get('keterangan', '-')}")
 
 # Input User
-if prompt := st.chat_input("Ketik di sini..."):
-    # Tampilkan & Simpan Pesan User
+if prompt := st.chat_input("Contoh: Apa maksud Surat Perintah?"):
+    # Simpan pesan user
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Logika Pencarian
+    # Proses pencarian
     intent = detect_intent(prompt)
     if intent == "KODE":
         results = smart_search(prompt, db_kode, stemmer)
     elif intent == "JENIS":
         results = smart_search(prompt, db_jenis, stemmer)
     else:
-        results = smart_search(prompt, db_kode, stemmer) + smart_search(prompt, db_jenis, stemmer)
-        results = sorted(results, key=lambda x: x['score'], reverse=True)
+        all_results = smart_search(prompt, db_kode, stemmer) + smart_search(prompt, db_jenis, stemmer)
+        results = sorted(all_results, key=lambda x: x.get('score', 0), reverse=True)
 
     # Respon Assistant
     with st.chat_message("assistant"):
         if results:
             top_results = results[:5]
-            response_text = f"Saya menemukan {len(results)} hasil. Berikut yang paling mendekati:"
-            st.markdown(response_text)
+            resp = f"Saya menemukan {len(results)} hasil. Berikut yang paling relevan:"
+            st.markdown(resp)
             
             for r in top_results:
-                label = "✅ Sangat Relevan" if r['score'] > 85 else "🔍 Relevan"
-                color = "green" if r['score'] > 85 else "orange"
-                with st.expander(f"📍 {r['kode']} - {r['klasifikasi']}"):
-                    st.markdown(f":{color}[**{label}** ({r['score']}% match)]")
-                    st.write(f"**Sifat:** {r['sifat']}")
-                    st.info(f"**Keterangan:** {r['keterangan']}")
+                s = r.get('score', 0)
+                lbl = "✅ Sangat Relevan" if s > 85 else "🔍 Relevan"
+                clr = "green" if s > 85 else "orange"
+                with st.expander(f"📍 {r.get('kode', 'N/A')} - {r.get('klasifikasi', 'Detail')}"):
+                    st.markdown(f":{clr}[**{lbl}** ({s}% match)]")
+                    st.write(f"**Sifat:** {r.get('sifat', '-')}")
+                    st.info(f"**Keterangan:** {r.get('keterangan', '-')}")
             
             st.session_state.messages.append({
                 "role": "assistant", 
-                "content": response_text,
+                "content": resp, 
                 "results": top_results
             })
             status_log = "Found"
         else:
-            error_msg = "Maaf, saya tidak menemukan data yang cocok. Cobalah kata kunci lain seperti 'Keuangan' atau 'Cuti'."
-            st.error(error_msg)
-            st.session_state.messages.append({"role": "assistant", "content": error_msg})
+            err = "Maaf, data tidak ditemukan. Coba gunakan kata kunci lain."
+            st.error(err)
+            st.session_state.messages.append({"role": "assistant", "content": err})
             status_log = "Not Found"
 
     write_log(prompt, intent, status_log)
