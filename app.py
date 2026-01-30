@@ -28,21 +28,6 @@ def load_db():
         st.error(f"Gagal memuat database: {e}")
         return [], []
 
-def suggest_correction(query, db):
-    words_pool = set()
-    for item in db:
-        content = f"{item.get('klasifikasi', '')} {item.get('keterangan', '')}".lower()
-        words_pool.update("".join([c for c in content if c.isalnum() or c.isspace()]).split())
-    
-    best_match, highest_ratio = None, 0
-    for word in words_pool:
-        if len(word) < 4: continue
-        ratio = fuzz.ratio(query.lower(), word)
-        if ratio > highest_ratio:
-            highest_ratio, best_match = ratio, word
-            
-    return best_match if 75 < highest_ratio < 100 else None
-
 def smart_search(query, db, stemmer):
     if not db: return []
     query_clean = query.lower().strip()
@@ -55,14 +40,18 @@ def smart_search(query, db, stemmer):
         kode = item.get('kode', '').lower()
         
         score = 0
+        # Pencarian Exact Match pada Kode
         if query_clean == kode: score += 100
         elif query_clean in kode: score += 60
         
+        # Pencarian Berbasis Fuzzy (Kemiripan Teks)
         text_score = fuzz.token_set_ratio(query_clean, f"{klasifikasi} {keterangan}")
         stem_bonus = 15 if query_stemmed in (klasifikasi + keterangan) else 0
         
         final_score = min(score + text_score + stem_bonus, 100)
-        if final_score > 65:
+        
+        # FILTER: Hanya tampilkan hasil dengan relevansi 75% ke atas
+        if final_score >= 75:
             item_copy = item.copy()
             item_copy['score'] = final_score
             scored_results.append(item_copy)
@@ -80,8 +69,9 @@ if "messages" not in st.session_state:
 def render_results(results, title):
     if results:
         st.subheader(title)
-        for r in results[:3]: # Limit 3 per kategori agar tidak terlalu panjang
+        for r in results[:3]: 
             s = r.get('score', 0)
+            # Warna indikator (Hijau jika sangat akurat)
             clr = "green" if s > 85 else "orange"
             with st.expander(f"📍 {r.get('kode', 'N/A')} - {r.get('klasifikasi', 'Detail')}"):
                 st.markdown(f":{clr}[**Relevansi: {s}%**]")
@@ -103,13 +93,13 @@ if prompt := st.chat_input("Ketik kata kunci (misal: Kepegawaian)..."):
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Search in both
+    # Lakukan pencarian
     res_kode = smart_search(prompt, db_kode, stemmer)
     res_jenis = smart_search(prompt, db_jenis, stemmer)
 
     with st.chat_message("assistant"):
         if res_kode or res_jenis:
-            response_text = "Berikut adalah hasil temuan saya:"
+            response_text = "Berikut adalah hasil yang paling relevan (75%-100%):"
             st.markdown(response_text)
             
             render_results(res_kode, "🗂️ Hasil Kode Klasifikasi")
@@ -122,16 +112,8 @@ if prompt := st.chat_input("Ketik kata kunci (misal: Kepegawaian)..."):
                 "res_jenis": res_jenis
             })
         else:
-            suggestion = suggest_correction(prompt, db_kode + db_jenis)
-            error_msg = f"Maaf, tidak ditemukan data untuk **'{prompt}'**."
+            error_msg = f"Maaf, tidak ditemukan hasil dengan akurasi tinggi (75%+) untuk **'{prompt}'**. Coba gunakan kata kunci lain."
             st.error(error_msg)
-            
-            if suggestion:
-                st.markdown(f"💡 Mungkin maksud Anda adalah:")
-                if st.button(f"🔍 Cari: {suggestion}", key="btn_suggest"):
-                    # Fitur Click-to-Search
-                    st.session_state.messages.append({"role": "user", "content": suggestion})
-                    st.rerun()
-            
             st.session_state.messages.append({"role": "assistant", "content": error_msg})
+    
     st.rerun()
