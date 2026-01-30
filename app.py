@@ -5,7 +5,10 @@ import datetime
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from thefuzz import fuzz
 
-# --- 1. DEFINISI FUNGSI (Harus di Atas) ---
+# --- 1. KONFIGURASI HALAMAN ---
+st.set_page_config(page_title="DinasChat Pro", page_icon="🤖", layout="centered")
+
+# --- 2. INISIALISASI RESOURCE (CACHE) ---
 
 @st.cache_resource
 def init_nlp():
@@ -16,16 +19,22 @@ def init_nlp():
 @st.cache_data
 def load_db():
     """Fungsi untuk memuat database JSON"""
-    # Pastikan file ini ada di folder yang sama dengan app.py
     try:
+        # Load database kode klasifikasi
         with open('db_kode.json', 'r', encoding='utf-8') as f:
             kode_db = json.load(f)
+        # Load database jenis naskah
         with open('db_jenis.json', 'r', encoding='utf-8') as f:
             jenis_db = json.load(f)
         return kode_db, jenis_db
     except FileNotFoundError:
-        st.error("File database (JSON) tidak ditemukan! Pastikan db_kode.json dan db_jenis.json tersedia.")
-        return [], []
+        return None, None
+
+# Inisialisasi awal
+stemmer = init_nlp()
+db_kode, db_jenis = load_db()
+
+# --- 3. FUNGSI LOGIKA (BACKEND) ---
 
 def write_log(query, intent, status):
     """Mencatat aktivitas chat ke file txt"""
@@ -33,109 +42,132 @@ def write_log(query, intent, status):
         tgl = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         f.write(f"[{tgl}] Q: {query} | Intent: {intent} | Status: {status}\n")
 
-def smart_search(query, db):
-    """Logika pencarian dengan Fuzzy Matching & Direct Search"""
-    query = query.lower().strip()
-    if not query: return []
+def detect_intent(prompt):
+    """NLP Sederhana: Deteksi niat user menggunakan pembersihan teks & set intersection"""
+    # Bersihkan teks: kecilkan huruf dan hapus tanda baca
+    clean_prompt = "".join([c for c in prompt.lower() if c.isalnum() or c.isspace()])
+    words = set(clean_prompt.split())
     
+    # Kamus kata kunci (bisa ditambah sesuai kebutuhan)
+    keywords_kode = {"kode", "klasifikasi", "pp", "pl", "py", "nomor", "no", "katalog"}
+    keywords_jenis = {"jenis", "surat", "naskah", "maksud", "arti", "definisi", "apa", "pengertian", "penjelasan"}
+
+    # Logika deteksi
+    if words.intersection(keywords_kode):
+        return "KODE"
+    elif words.intersection(keywords_jenis):
+        return "JENIS"
+    return "UNKNOWN"
+
+def smart_search(query, db):
+    """Logika pencarian dengan Fuzzy Matching & Stemming"""
+    if not db: return []
+    
+    query_clean = query.lower().strip()
+    query_stemmed = stemmer.stem(query_clean)
     results = []
+    
     for item in db:
         # A. Direct Code Search (Prioritas Utama)
-        if query == item['kode'].lower():
-            return [item] # Langsung kembalikan jika kode persis
+        if query_clean == item['kode'].lower():
+            return [item] 
         
-        # B. Fuzzy Matching pada Klasifikasi & Keterangan
+        # B. Fuzzy Matching & Keyword Search
         content = f"{item['klasifikasi']} {item['keterangan']}".lower()
-        score = fuzz.partial_ratio(query, content)
+        score = fuzz.partial_ratio(query_clean, content)
         
-        # Jika skor kemiripan > 75 atau kata kunci ada dalam teks
-        if score > 75 or query in content:
+        # Cek apakah query ada di konten (atau versi stem-nya)
+        if score > 75 or query_clean in content or query_stemmed in content:
             results.append(item)
             
     return results
 
-# --- 2. CONFIG & STATE MANAGEMENT ---
-
-st.set_page_config(page_title="DinasChat Pro", page_icon="🤖")
-
-# Memanggil fungsi yang sudah didefinisikan di atas
-stemmer = init_nlp()
-db_kode, db_jenis = load_db()
+# --- 4. STATE MANAGEMENT ---
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
-if "intent" not in st.session_state:
-    st.session_state.intent = None
+    # Pesan sambutan pertama kali
+    st.session_state.messages.append({"role": "assistant", "content": "Halo! Silakan tanya mengenai Kode Klasifikasi atau Jenis Naskah Dinas."})
 
-# --- 3. UI SIDEBAR (Fitur Clear Chat & Auto-Update) ---
+# --- 5. UI SIDEBAR ---
 
 with st.sidebar:
     st.header("⚙️ Panel Kontrol")
     
-    # Fitur Auto-Update
-    if st.button("🔄 Auto-Update Database", use_container_width=True):
-        st.cache_data.clear() # Menghapus cache agar baca ulang JSON
+    if st.button("🔄 Refresh Database", use_container_width=True):
+        st.cache_data.clear()
         st.success("Database diperbarui!")
         st.rerun()
         
-    # Fitur Clear Chat
     if st.button("🗑️ Hapus Riwayat Chat", use_container_width=True):
-        st.session_state.messages = []
-        st.session_state.intent = None
+        st.session_state.messages = [{"role": "assistant", "content": "Riwayat dihapus. Ada yang bisa saya bantu?"}]
         st.rerun()
     
     st.divider()
-    st.caption("Status Log: Aktif")
     if os.path.exists("chatbot_log.txt"):
-        st.download_button("📥 Download Log", open("chatbot_log.txt", "rb"), "chat_log.txt")
+        st.download_button("📥 Download Log Aktivitas", open("chatbot_log.txt", "rb"), "chat_log.txt")
 
-# --- 4. INTERFACE CHAT ---
+# --- 6. INTERFACE CHAT ---
 
-st.title("🤖 Chatbot Naskah Dinas")
-st.markdown("Cari kode klasifikasi (ex: `PP.01`) atau jenis naskah (ex: `Laporan`).")
+st.title("🤖 DinasChat Pro")
+st.caption("Sistem Informasi Naskah Dinas Otomatis")
 
-# Tampilkan history chat
+# Render Riwayat Chat (Ini yang membuat chat tidak hilang)
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.markdown(msg["content"])
+        # Jika ada data hasil pencarian di pesan assistant sebelumnya, tampilkan ulang (opsional)
+        if "results" in msg:
+            for r in msg["results"]:
+                with st.expander(f"📍 {r['kode']} - {r['klasifikasi']}"):
+                    st.write(f"**Sifat:** {r['sifat']}")
+                    st.write(f"**Keterangan:** {r['keterangan']}")
 
-# Input User
-if prompt := st.chat_input("Ketik pertanyaan Anda di sini..."):
+# Input Chat
+if prompt := st.chat_input("Contoh: Apa itu surat edaran? / Cari kode PP.01"):
+    
+    # 1. Simpan & Tampilkan Pesan User
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # A. Intent Detection (State Management)
-    p_clean = prompt.lower()
-    if any(x in p_clean for x in ["kode", "klasifikasi", "pp.", "pl.", "py."]):
-        st.session_state.intent = "KODE"
-    elif any(x in p_clean for x in ["jenis", "surat", "apa itu", "arti", "maksud"]):
-        st.session_state.intent = "JENIS"
-
-    # B. Pencarian berdasarkan konteks
-    if st.session_state.intent == "KODE":
+    # 2. Deteksi Intent & Cari Data
+    intent = detect_intent(prompt)
+    
+    if intent == "KODE":
         results = smart_search(prompt, db_kode)
-    elif st.session_state.intent == "JENIS":
+    elif intent == "JENIS":
         results = smart_search(prompt, db_jenis)
     else:
-        # Fallback: Cari di kedua DB jika intent tidak jelas
+        # Gabungkan hasil jika intent tidak spesifik
         results = smart_search(prompt, db_kode) + smart_search(prompt, db_jenis)
 
-    # C. Menampilkan Jawaban
+    # 3. Respon Assistant
     with st.chat_message("assistant"):
         if results:
-            header = "🔍 Hasil yang ditemukan:"
-            st.write(header)
-            for r in results[:5]: # Batasi 5 hasil agar tidak spam
+            msg_text = f"Ditemukan {len(results)} informasi terkait pertanyaan Anda:"
+            st.markdown(msg_text)
+            
+            # Batasi tampilan agar tidak memenuhi layar
+            display_results = results[:5]
+            for r in display_results:
                 with st.expander(f"📍 {r['kode']} - {r['klasifikasi']}"):
                     st.write(f"**Sifat:** {r['sifat']}")
                     st.write(f"**Keterangan:** {r['keterangan']}")
+            
+            # Simpan ke session state
+            st.session_state.messages.append({
+                "role": "assistant", 
+                "content": msg_text,
+                "results": display_results # Simpan data hasil agar tetap ada saat rerun
+            })
             status_log = "Found"
         else:
-            msg_error = "Maaf, informasi tidak ditemukan. Coba kata kunci lain."
-            st.error(msg_error)
+            error_msg = "Maaf, saya tidak menemukan data yang cocok. Coba gunakan kata kunci lain seperti 'Surat Perintah' atau kode 'PL'."
+            st.error(error_msg)
+            st.session_state.messages.append({"role": "assistant", "content": error_msg})
             status_log = "Not Found"
 
-    # D. Logging
-    write_log(prompt, st.session_state.intent, status_log)
-    st.session_state.messages.append({"role": "assistant", "content": f"Sistem menemukan {len(results)} hasil."})
+    # 4. Finalisasi
+    write_log(prompt, intent, status_log)
+    st.rerun() # Memicu refresh agar UI sinkron
