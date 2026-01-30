@@ -1,4 +1,5 @@
 streamlit
 sastrawi
 thefuzz
+fuzzywuzzy
 python-Levenshtein
