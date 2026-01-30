@@ -1,11 +1,27 @@
 import streamlit as st
 import json
 import os
+import pandas as pd
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from thefuzz import fuzz
+from datetime import datetime
 
 # --- 1. KONFIGURASI HALAMAN ---
 st.set_page_config(page_title="DinasChat Pro", page_icon="🤖", layout="centered")
+
+# Custom CSS untuk mempercantik Sidebar (opsional)
+st.markdown("""
+    <style>
+    [data-testid="stSidebar"] {
+        background-color: #ffffff;
+    }
+    .main-header {
+        font-size: 24px;
+        font-weight: bold;
+        color: #1E3A8A;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
 # --- 2. CORE FUNCTIONS ---
 
@@ -76,11 +92,45 @@ db_kode, db_jenis = load_db()
 if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "assistant", "content": "Halo! Silakan tanya tentang **Kode Klasifikasi** atau **Jenis Surat**."}]
 
-# --- 4. UI RENDERER ---
+# --- 4. SIDEBAR (SESUAI GAMBAR) ---
+with st.sidebar:
+    st.markdown("### ⚙️ Menu Utama")
+    st.divider()
+    
+    st.caption("PERCAKAPAN")
+    # Menu Chat Aktif bergaya button
+    st.button("💬 Chat Aktif", use_container_width=True, type="secondary")
+    
+    # Spacer untuk mendorong menu ke bawah
+    st.markdown("<br>" * 15, unsafe_allow_html=True)
+    
+    st.divider()
+    
+    # Fitur Download Log (CSV/Excel)
+    if st.session_state.messages:
+        chat_data = pd.DataFrame(st.session_state.messages)
+        csv = chat_data.to_csv(index=False).encode('utf-8')
+        st.download_button(
+            label="📥 Download Log Chat",
+            data=csv,
+            file_name=f"log_chat_{datetime.now().strftime('%Y%m%d_%H%M')}.csv",
+            mime='text/csv',
+            use_container_width=True
+        )
+
+    # Fitur Hapus Riwayat
+    if st.button("🗑️ Hapus Riwayat Chat", use_container_width=True, type="primary"):
+        st.session_state.messages = [{"role": "assistant", "content": "Halo! Ada yang bisa saya bantu kembali?"}]
+        st.rerun()
+    
+    # Footer Versi
+    st.markdown("<center><p style='font-size: 12px; color: grey;'>Versi 1.1.0 - PKPU 1257</p></center>", unsafe_allow_html=True)
+
+# --- 5. UI RENDERER ---
 def render_results(results, title):
     if results:
         st.subheader(title)
-        for r in results[:3]: # Limit 3 per kategori agar tidak terlalu panjang
+        for r in results[:3]:
             s = r.get('score', 0)
             clr = "green" if s > 85 else "orange"
             with st.expander(f"📍 {r.get('kode', 'N/A')} - {r.get('klasifikasi', 'Detail')}"):
@@ -89,7 +139,7 @@ def render_results(results, title):
                 st.info(f"**Keterangan:** {r.get('keterangan', '-')}")
         st.divider()
 
-# --- 5. INTERFACE CHAT ---
+# --- 6. INTERFACE CHAT ---
 st.title("🤖 DinasChat Pro")
 
 for msg in st.session_state.messages:
@@ -103,7 +153,6 @@ if prompt := st.chat_input("Ketik kata kunci (misal: Kepegawaian)..."):
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Search in both
     res_kode = smart_search(prompt, db_kode, stemmer)
     res_jenis = smart_search(prompt, db_jenis, stemmer)
 
@@ -129,7 +178,6 @@ if prompt := st.chat_input("Ketik kata kunci (misal: Kepegawaian)..."):
             if suggestion:
                 st.markdown(f"💡 Mungkin maksud Anda adalah:")
                 if st.button(f"🔍 Cari: {suggestion}", key="btn_suggest"):
-                    # Fitur Click-to-Search
                     st.session_state.messages.append({"role": "user", "content": suggestion})
                     st.rerun()
             
